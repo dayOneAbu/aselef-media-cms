@@ -67,15 +67,21 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
 
+  console.log('Page data:', {
+    hero,
+    layout,
+    slug: page.slug,
+    hasLayout: Boolean(layout),
+    layoutLength: layout?.length,
+  })
+
   return (
     <article className="pt-16 pb-24">
       <PageClient />
-      {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-
       {draft && <LivePreviewListener />}
-
       <RenderHero {...hero} />
+      {!layout && <div>No layout blocks found</div>}
       <RenderBlocks blocks={layout} />
     </article>
   )
@@ -92,13 +98,13 @@ export async function generateMetadata({ params: paramsPromise }): Promise<Metad
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
-
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'pages',
     draft,
     limit: 1,
+    depth: 2,
     pagination: false,
     overrideAccess: draft,
     where: {
@@ -106,6 +112,12 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
+  })
+
+  console.log('Page query result:', {
+    found: Boolean(result.docs?.[0]),
+    totalDocs: result.docs?.length,
+    pageData: result.docs?.[0],
   })
 
   return result.docs?.[0] || null

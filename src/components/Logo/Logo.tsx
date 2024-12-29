@@ -1,5 +1,7 @@
 import clsx from 'clsx'
+import { Home } from 'lucide-react'
 import React from 'react'
+import { Avatar, AvatarFallback } from '../ui/avatar'
 
 interface Props {
   className?: string
@@ -16,14 +18,37 @@ export const Logo = (props: Props) => {
   return (
     /* eslint-disable @next/next/no-img-element */
     <img
-      alt="Payload Logo"
+      alt="Aselef Media Corporation Logo"
       width={193}
-      height={34}
+      height={38}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      className={clsx('max-w-[9.375rem] w-full h-[36px]', className)}
+      src="/ezgif.com-gif-maker.webp"
     />
+  )
+}
+export const AdminLogo = () => {
+  return (
+    <div className="flex  justify-center items-center gap-2">
+      <img
+        width={193}
+        height={38}
+        src="/ezgif.com-gif-maker.webp"
+        alt="Aselef Media Communication Logo"
+      />
+    </div>
+  )
+}
+export const AdminHome = () => {
+  return <Home className="text-white h-4 w-4 p-4" />
+}
+
+export const AccountIcon = () => {
+  return (
+    <Avatar className="h-16 bg-cyan-600 text-white w-16">
+      <AvatarFallback>AMC</AvatarFallback>
+    </Avatar>
   )
 }

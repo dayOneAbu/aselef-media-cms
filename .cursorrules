@@ -1,0 +1,374 @@
+# ASELEF MEDIA AND COMMUNICATIONS Blog Project Rules
+# This file defines the rules and processes for our project
+
+# Technology Stack Requirements
+technologies:
+  frontend:
+    - framework: 'Next.js@15.1.0'
+    - styling: 'tailwindcss@latest'
+    - ui:
+        - 'shadcn-ui@latest'
+        - 'magic-ui@latest'
+        - 'vaul@latest'
+        - 'sonner@latest'
+        - 'cmdk@latest'
+    - forms: '@hookform/resolvers@latest'
+    - validation: 'zod@latest'
+  
+  backend:
+    - cms: 'payload@3.9.0'
+    - auth:
+        current: 'payload-auth@3.9.0'
+
+    compatibility:
+    notes:
+      - 'Payload CMS 3.9.0 requires Next.js 15 for optimal performance'
+      - 'Server Actions are fully supported in Next.js 15'
+      - 'App Router is the recommended approach'
+      - 'React Server Components are fully utilized'
+
+
+# Collections Structure
+collections:
+  core:
+    - Pages
+    - Users
+    - Posts
+    - Categories
+    - Media
+  
+
+# File Structure
+structure:
+  components:
+    - 'ui: Reusable UI components'
+    - 'forms: Form components'
+    - 'layouts: Layout components'
+
+  lib:
+    - 'db: Database configuration'
+    - 'utils: Utility functions'
+    - 'validation: Schema validation'
+
+  types:
+    - 'Global type definitions'
+
+# Code Standards
+standards:
+  general:
+    - 'Use TypeScript strict mode'
+    - 'Implement proper error handling'
+    - 'Add comprehensive logging'
+    - 'Document all public APIs'
+    - 'Follow SOLID principles'
+
+  nextjs:
+    - 'Use server components by default'
+    - 'Implement proper data fetching patterns'
+    - 'Optimize for performance'
+    - 'Follow app router best practices'
+
+  security:
+    - 'Implement proper authentication'
+    - 'Use role-based access control'
+    - 'Sanitize all inputs'
+    - 'Protect sensitive data'
+
+
+# Multi-Agent Development Process
+agents:
+  architect:
+    role: 'System Design & Architecture'
+    responsibilities:
+      - 'Review and approve architectural decisions'
+      - 'Ensure scalability and performance'
+      - 'Maintain system consistency'
+      - 'Plan data structures and relationships'
+    triggers:
+      - 'New feature proposal'
+      - 'Architecture changes'
+      - 'Performance optimization requests'
+      - 'Database schema updates'
+
+  developer:
+    role: 'Code Implementation'
+    responsibilities:
+      - 'Write clean, maintainable code'
+      - 'Implement features according to specs'
+      - 'Handle error cases and edge conditions'
+      - 'Optimize database queries'
+    triggers:
+      - 'New feature request'
+      - 'Bug fix needed'
+      - 'Code optimization required'
+      - 'Performance issues'
+
+  reviewer:
+    role: 'Code Review & Quality'
+    responsibilities:
+      - 'Review code for best practices'
+      - 'Check for security vulnerabilities'
+      - 'Ensure code style consistency'
+      - 'Verify state management patterns'
+    checks:
+      - 'Code style compliance'
+      - 'Security best practices'
+      - 'Performance implications'
+      - 'Test coverage'
+      - 'URL state management'
+
+  security:
+    role: 'Security Compliance'
+    responsibilities:
+      - 'Review security implications'
+      - 'Ensure data protection'
+      - 'Audit authentication/authorization'
+      - 'Monitor security events'
+    checks:
+      - 'Authentication flows'
+      - 'Data encryption'
+      - 'API security'
+      - 'Input validation'
+      - 'Rate limiting'
+
+# Development Workflow
+workflow:
+  featureImplementation:
+    steps:
+      1:
+        agent: 'architect'
+        action: 'Review feature proposal'
+        output: 'Architecture decision document'
+        stateConsiderations:
+          - 'Determine if state should be URL-based'
+          - 'Plan server component structure'
+          - 'Identify client/server state boundaries'
+          - 'Consider data persistence needs'
+
+      2:
+        agent: 'developer'
+        action: 'Implement feature'
+        requirements:
+          - 'Follow Next.js 15 app router patterns'
+          - 'Use server actions over API routes'
+          - 'Implement URL state management with nuqs'
+          - 'Add proper loading and error states'
+          - 'Implement proper error handling'
+          - 'Add logging and monitoring'
+
+      3:
+        agent: 'reviewer'
+        action: 'Code review'
+        checks:
+          - 'Code quality'
+          - 'Performance'
+          - 'Security'
+          - 'Documentation'
+          - 'State management'
+
+      4:
+        agent: 'security'
+        action: 'Security review'
+        focus:
+          - 'Data protection'
+          - 'Authentication'
+          - 'Authorization'
+          - 'Rate limiting'
+
+ 
+# Error Handling
+errors:
+  levels:
+    - 'fatal: System crash level'
+    - 'error: Operation failure'
+    - 'warn: Potential issues'
+    - 'info: General information'
+    - 'debug: Debug information'
+
+  handling:
+    - 'Use custom error classes'
+    - 'Implement proper error boundaries'
+    - 'Log errors with context'
+    - 'Provide user-friendly messages'
+
+# Deployment Guidelines
+deployment:
+  vercel:
+    configuration:
+      - 'Use Edge Functions where appropriate'
+      - 'Configure proper caching strategies'
+      - 'Set up proper environment variables'
+      - 'Configure deployment regions'
+    monitoring:
+      - 'Set up error tracking with Sentry'
+      - 'Configure OpenTelemetry for tracing'
+      - 'Implement custom logging'
+      - 'Monitor Core Web Vitals'
+
+  database:
+    neon:
+      - 'Configure connection pooling'
+      - 'Set up read replicas'
+      - 'Implement query optimization'
+      - 'Configure automated backups'
+
+  security:
+    measures:
+      - 'Implement rate limiting'
+      - 'Set up CORS policies'
+      - 'Configure CSP headers'
+      - 'Enable WAF protection'
+
+# Performance Requirements
+performance:
+  metrics:
+    - 'Time to First Byte (TTFB) < 100ms'
+    - 'First Contentful Paint (FCP) < 1.5s'
+    - 'Largest Contentful Paint (LCP) < 2.5s'
+    - 'First Input Delay (FID) < 100ms'
+    - 'Cumulative Layout Shift (CLS) < 0.1'
+
+  optimization:
+    - 'Implement proper code splitting'
+    - 'Use React Suspense boundaries'
+    - 'Optimize images and assets'
+    - 'Minimize client-side JavaScript'
+    - 'Utilize edge caching'
+
+# Commit Guidelines
+commits:
+  format: 'type(scope): description'
+  types:
+    - 'feat: New feature'
+    - 'fix: Bug fix'
+    - 'docs: Documentation'
+    - 'style: Code style'
+    - 'refactor: Code refactor'
+    - 'test: Testing'
+    - 'chore: Maintenance'
+
+# Backup and Recovery
+backup:
+  database:
+    - 'Automated daily backups'
+    - 'Point-in-time recovery'
+    - 'Cross-region replication'
+    - 'Backup retention policy'
+
+  assets:
+    - 'Media file backups'
+    - 'Document versioning'
+    - 'Metadata backup'
+    - 'Recovery procedures'
+
+  monitoring:
+    - 'Backup success monitoring'
+    - 'Recovery testing schedule'
+    - 'Audit logging'
+    - 'Alert configuration'
+
+# Authentication Strategy
+auth:
+  phase1:
+    provider: 'Payload Built-in Auth'
+    features:
+      - 'Email/password authentication'
+      - 'Role-based access control'
+      - 'Session management'
+      - 'Password reset flow'
+      - 'Email verification'
+    implementation:
+      - "Use Payload's built-in auth system"
+      - 'Implement custom auth endpoints in Next.js'
+      - 'Set up proper session handling'
+      - 'Configure secure password policies'
+      - 'Set up email templates for auth flows'
+
+
+# UI and Animation Patterns
+ui_patterns:
+  floating:
+    description: 'Elements that float and respond to user interaction'
+    implementations:
+      - 'Floating navigation with Framer Motion'
+      - 'Hover cards using shadcn/ui + Aceternity'
+      - 'Animated tooltips with Magic UI'
+      - 'Context menus with radix-ui animations'
+    libraries:
+      - 'framer-motion'
+      - 'aceternity-ui'
+      - 'magic-ui'
+      - 'vaul'
+
+  morphing:
+    description: 'Elements that transform and change shape'
+    implementations:
+      - 'Shape-shifting buttons with Framer Motion'
+      - 'Expanding cards using Aceternity UI'
+      - 'Transitioning layouts with Motion One'
+      - 'Fluid backgrounds with Magic UI'
+    libraries:
+      - 'framer-motion'
+      - 'aceternity-ui'
+      - 'motion-one'
+      - 'magic-ui'
+
+  micro_interactions:
+    description: 'Small, subtle animations that provide feedback'
+    implementations:
+      - 'Button click effects with tailwindcss-animate'
+      - 'Input focus states with shadcn/ui'
+      - 'Loading spinners with Lucide icons'
+      - 'Progress indicators with Sonner'
+    libraries:
+      - 'tailwindcss-animate'
+      - 'shadcn-ui'
+      - 'lucide-react'
+      - 'sonner'
+
+  scroll_animations:
+    description: 'Animations triggered by scroll events'
+    implementations:
+      - 'Parallax effects with Framer Motion'
+      - 'Scroll-triggered reveals with Aceternity'
+      - 'Smooth transitions with Motion One'
+      - 'Intersection animations with Magic UI'
+    libraries:
+      - 'framer-motion'
+      - 'aceternity-ui'
+      - 'motion-one'
+      - 'magic-ui'
+
+animation_patterns:
+  layout:
+    description: 'Page and layout transition animations'
+    implementations:
+      - 'Page transitions with Framer Motion'
+      - 'Route changes using Next.js + Motion One'
+      - 'Modal animations with Vaul'
+      - 'List reordering with Auto Animate'
+    libraries:
+      - 'framer-motion'
+      - 'motion-one'
+      - 'vaul'
+      - '@formkit/auto-animate'
+
+  feedback:
+    description: 'User feedback animations'
+    implementations:
+      - 'Loading states with Lucide'
+      - 'Success/error animations with Sonner'
+      - 'Progress indicators with shadcn/ui'
+      - 'Notification toasts with Magic UI'
+    libraries:
+      - 'lucide-react'
+      - 'sonner'
+      - 'shadcn-ui'
+      - 'magic-ui'
+
+    libraries:
+      - 'tailwindcss-animate'
+      - 'motion-one'
+      - 'magic-ui'
+
+

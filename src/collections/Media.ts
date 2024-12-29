@@ -75,6 +75,26 @@ export const Media: CollectionConfig = {
         height: 630,
         crop: 'center',
       },
+      {
+        name: 'card',
+        width: 640,
+        height: 480,
+      },
+      {
+        name: 'portrait',
+        width: 768,
+        height: 1024,
+      },
+      {
+        name: 'square',
+        width: 1200,
+        height: 1200,
+      },
+      {
+        name: 'feature',
+        width: 1024,
+        height: 576,
+      },
     ],
   },
 }

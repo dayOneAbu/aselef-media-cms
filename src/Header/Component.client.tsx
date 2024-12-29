@@ -4,17 +4,20 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import type { Header } from '@/payload-types'
+import type { Header, Category } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
+import { MobileNav } from './Nav/mobile-nav'
+import { DesktopNav } from './Nav/desktop-nav'
+import { Breadcrumbs } from './Nav/breadcrumbs'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 interface HeaderClientProps {
+  categories: Category[]
   data: Header
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  /* Storing the value in a useState to avoid hydration errors */
+export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
@@ -29,13 +32,52 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
+  const navItems = [
+    ...(categories || []).map((category) => ({
+      type: 'link' as const,
+      link: {
+        href: `/categories/${category.slug}`,
+        label: category.title,
+      },
+    })),
+    { type: 'separator' as const },
+    ...(data?.navItems || []).map((item) => ({
+      type: 'link' as const,
+      link: {
+        href:
+          item.link?.type === 'reference'
+            ? `/${item.link.reference?.value?.slug}`
+            : item.link?.url || '#',
+        label: item.link?.label || '',
+      },
+    })),
+  ]
+
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
-        <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
-        </Link>
-        <HeaderNav data={data} />
+    <header className="h-40">
+      <div className="container mx-auto px-4 flex flex-col">
+        {/* Top bar - push to top */}
+        <div className="flex items-center h-20 justify-between py-4">
+          <Link
+            href="/"
+            className="text-2xl font-bold text-foreground hover:text-foreground/90 transition-colors"
+          >
+            NEWSLETTER
+          </Link>
+          <div className="flex items-center gap-4">
+            <div className="lg:mr-14 text-foreground">
+              <ThemeSelector />
+            </div>
+            <MobileNav items={navItems} />
+          </div>
+        </div>
+
+        <div className="py-2 h-10 flex-1">
+          <DesktopNav items={navItems} />
+        </div>
+        <div className="py-2 h-10 flex-shrink-0">
+          <Breadcrumbs />
+        </div>
       </div>
     </header>
   )

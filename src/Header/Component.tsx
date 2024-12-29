@@ -1,11 +1,19 @@
-import { HeaderClient } from './Component.client'
-import { getCachedGlobal } from '@/utilities/getGlobals'
 import React from 'react'
+import { Category } from '@/payload-types'
+import { HeaderClient } from './Component.client'
 
-import type { Header } from '@/payload-types'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
-export async function Header() {
-  const headerData: Header = await getCachedGlobal('header', 1)()
+interface HeaderProps {
+  categories: Category[]
+}
 
-  return <HeaderClient data={headerData} />
+export async function Header({ categories }: HeaderProps) {
+  const payload = await getPayload({ config: configPromise })
+  const header = await payload.findGlobal({
+    slug: 'header',
+  })
+
+  return <HeaderClient categories={categories} data={header} />
 }
