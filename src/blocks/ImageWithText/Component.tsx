@@ -1,104 +1,101 @@
-import type { ImageWithText as ImageWithTextType, Media } from '@/payload-types'
-
-import { cn } from 'src/utilities/cn'
 import React from 'react'
-import RichText from '@/components/RichText'
 import Image from 'next/image'
+import { cn } from '@/utilities/cn'
+import RichText from '@/components/RichText'
+import type { ImageWithText as ImageWithTextType } from '@/payload-types'
 
 type Props = {
   className?: string
+  vAlignment?: 'start' | 'center' | 'end'
+  hAlignment?: 'left' | 'center' | 'right'
 } & ImageWithTextType
 
 export const ImageWithTextBlock: React.FC<Props> = ({
   className,
   layout = 'textRight',
   image,
-  text,
   backgroundColor,
   textColor,
-  imageSize,
-  padding,
-  vOffset,
-  hOffset,
+  imageSize = 'medium',
+  padding = 'medium',
+  vAlignment = 'center',
+  hAlignment = 'left',
+  text,
 }) => {
-  const imageData = image as Media
+  const imageData = typeof image === 'object' ? image : null
 
   const containerClasses = cn(
-    'mx-auto w-full',
+    'grid gap-32 border-2 border-red-500',
     {
-      'grid md:grid-cols-2 gap-8': ['textLeft', 'textRight'].includes(layout),
-      'grid grid-cols-1 gap-6': ['textAbove', 'textBelow'].includes(layout),
+      'grid-cols-1 md:grid-cols-2': ['textLeft', 'textRight'].includes(layout),
+      'grid-cols-1': ['textAbove', 'textBelow'].includes(layout),
       relative: layout === 'textOverlay',
     },
     {
-      'bg-transparent': backgroundColor === 'none',
       'bg-gold': backgroundColor === 'gold',
       'bg-purple': backgroundColor === 'purple',
       'bg-black': backgroundColor === 'black',
     },
     {
       'p-0': padding === 'none',
-      'p-4': padding === 'small',
-      'p-8': padding === 'medium',
-      'p-12': padding === 'large',
+      'p-16': padding === 'small',
+      'p-24': padding === 'medium',
+      'p-32': padding === 'large',
     },
     className,
   )
 
   const textClasses = cn(
-    'flex flex-col justify-center',
+    'prose max-w-none',
     {
-      'text-dark': textColor === 'dark',
-      'text-light': textColor === 'light',
+      'text-foreground': textColor === 'dark',
+      'text-white': textColor === 'light',
       'text-primary': textColor === 'primary',
     },
     {
-      'order-1': layout === 'textRight',
-      'order-2': layout === 'textLeft',
-      'absolute inset-0 flex items-center justify-center bg-black/50 text-white p-6':
-        layout === 'textOverlay',
+      'order-2': layout === 'textRight',
+      'order-1': layout === 'textLeft',
+      'absolute inset-0 flex p-32 bg-black/50': layout === 'textOverlay',
+    },
+    {
+      'items-start': vAlignment === 'start',
+      'items-center': vAlignment === 'center',
+      'items-end': vAlignment === 'end',
+    },
+    {
+      'text-left': hAlignment === 'left',
+      'text-center': hAlignment === 'center',
+      'text-right': hAlignment === 'right',
     },
   )
 
   const imageClasses = cn(
-    'relative',
+    'relative w-full',
     {
-      'order-2': layout === 'textRight',
-      'order-1': layout === 'textLeft',
+      'order-1': layout === 'textRight',
+      'order-2': layout === 'textLeft',
     },
     {
-      'h-48': imageSize === 'small',
-      'h-64': imageSize === 'medium',
-      'h-96': imageSize === 'large',
+      'h-96': imageSize === 'small',
+      'h-128': imageSize === 'medium',
+      'h-160': imageSize === 'large',
       'h-full': imageSize === 'full',
     },
   )
 
-  const getOffsetValue = (value: string | null | undefined) => {
-    if (!value || value === 'none') return 0
-    return parseInt(value)
-  }
-
-  const imageWrapperStyle = {
-    marginTop: `${getOffsetValue(vOffset)}px`,
-    marginLeft: `${getOffsetValue(hOffset)}px`,
-  }
-
   return (
     <div className={containerClasses}>
-      <div className={imageClasses} style={imageWrapperStyle}>
+      <div className={imageClasses}>
         {imageData?.url && (
-          <Image src={imageData.url} alt={imageData.alt || ''} fill className="object-cover" />
+          <Image
+            src={imageData.url}
+            alt={imageData.alt || ''}
+            fill
+            className="object-cover rounded-2xl"
+          />
         )}
       </div>
-      <div className={textClasses}>
-        <RichText
-          data={text}
-          className={cn({
-            'z-10': layout === 'textOverlay',
-          })}
-        />
-      </div>
+      <div className={textClasses}>{text && <RichText data={text} />}</div>
     </div>
   )
 }

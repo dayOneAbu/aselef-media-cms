@@ -8,6 +8,7 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ImageWithTextBlock } from '@/blocks/ImageWithText/Component'
+import { ContactSplitBlock } from '@/blocks/ContactSplit/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -16,6 +17,7 @@ const blockComponents = {
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   imageWithText: ImageWithTextBlock,
+  contactSplit: ContactSplitBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -30,12 +32,9 @@ export const RenderBlocks: React.FC<{
       <Fragment>
         {blocks.map((block, index) => {
           const { blockType } = block
-          console.log('Block type:', blockType)
-          console.log('Available components:', Object.keys(blockComponents))
 
           if (blockType && blockType in blockComponents) {
             const Block = blockComponents[blockType]
-            console.log('Found component for block type:', blockType)
 
             if (Block) {
               return (
@@ -45,7 +44,7 @@ export const RenderBlocks: React.FC<{
               )
             }
           }
-          console.log('No component found for block type:', blockType)
+
           return null
         })}
       </Fragment>

@@ -75,6 +75,34 @@ export const Posts: CollectionConfig<'posts'> = {
       required: true,
     },
     {
+      name: 'isFeatured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Show this post in the featured section',
+      },
+    },
+    {
+      name: 'timeToRead',
+      type: 'number',
+      min: 1,
+      defaultValue: 3,
+      admin: {
+        position: 'sidebar',
+        description: 'Estimated time to read in minutes',
+      },
+    },
+    {
+      name: 'visitorsRead',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+        description: 'Number of visitors who have read this post',
+      },
+    },
+    {
       type: 'tabs',
       tabs: [
         {

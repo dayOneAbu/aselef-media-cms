@@ -33,7 +33,7 @@ export default buildConfig({
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
-      // TODO: remove this and add an ICon
+      // TODO: remove this
       graphics: {
         Logo: {
           path: './components/Logo/Logo.tsx',
@@ -145,5 +145,8 @@ export default buildConfig({
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  graphQL: {
+    schemaOutputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
 })

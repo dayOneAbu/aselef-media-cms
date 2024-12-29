@@ -67,14 +67,6 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
 
-  console.log('Page data:', {
-    hero,
-    layout,
-    slug: page.slug,
-    hasLayout: Boolean(layout),
-    layoutLength: layout?.length,
-  })
-
   return (
     <article className="pt-16 pb-24">
       <PageClient />
@@ -112,12 +104,6 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
-  })
-
-  console.log('Page query result:', {
-    found: Boolean(result.docs?.[0]),
-    totalDocs: result.docs?.length,
-    pageData: result.docs?.[0],
   })
 
   return result.docs?.[0] || null

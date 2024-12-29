@@ -1,5 +1,10 @@
 import { Block } from 'payload'
-import backgroundColor from '@/fields/backgroundColor'
+import {
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 
 export const ImageWithText: Block = {
   slug: 'imageWithText',
@@ -35,10 +40,18 @@ export const ImageWithText: Block = {
     {
       name: 'text',
       type: 'richText',
-      required: true,
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [
+            ...rootFeatures,
+            HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ]
+        },
+      }),
       label: 'Text Content',
     },
-    backgroundColor,
     {
       name: 'textColor',
       type: 'select',
@@ -73,28 +86,30 @@ export const ImageWithText: Block = {
       ],
     },
     {
-      name: 'vOffset',
+      name: 'vAlignment',
       type: 'select',
-      label: 'Vertical Spacing',
-      defaultValue: 'none',
+      defaultValue: 'center',
       options: [
-        { label: 'None', value: 'none' },
-        { label: 'Small (16px)', value: '16' },
-        { label: 'Medium (32px)', value: '32' },
-        { label: 'Large (48px)', value: '48' },
+        { label: 'Top', value: 'start' },
+        { label: 'Center', value: 'center' },
+        { label: 'Bottom', value: 'end' },
       ],
+      admin: {
+        width: '50%',
+      },
     },
     {
-      name: 'hOffset',
+      name: 'hAlignment',
       type: 'select',
-      label: 'Horizontal Spacing',
-      defaultValue: 'none',
+      defaultValue: 'left',
       options: [
-        { label: 'None', value: 'none' },
-        { label: 'Small (16px)', value: '16' },
-        { label: 'Medium (32px)', value: '32' },
-        { label: 'Large (48px)', value: '48' },
+        { label: 'Left', value: 'left' },
+        { label: 'Center', value: 'center' },
+        { label: 'Right', value: 'right' },
       ],
+      admin: {
+        width: '50%',
+      },
     },
   ],
 }
