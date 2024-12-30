@@ -1,21 +1,22 @@
-// import PageTemplate, { generateMetadata } from './[slug]/page'
-// export default PageTemplate
-
-// export { generateMetadata }
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { FeaturedGrid } from '@/components/featured-news/featured-grid'
+
 import { Metadata } from 'next'
 import { cache } from 'react'
+import { FeaturedGrid } from '@/components/featured-news/featured-grid'
 import { Category, FeaturedPost } from '@/components/featured-news/types'
+import { PageRange } from '@/components/PageRange'
+import { CollectionArchive } from '@/components/CollectionArchive'
+import { Pagination } from '@/components/Pagination'
 
 export default async function Home() {
-  const articles = await queryPosts()
+  const FeaturedArticles = await queryFeaturedPosts()
+  const posts = await queryPosts()
 
   return (
     <div className="container mx-auto px-4 py-8">
       <section className="w-full">
-        <FeaturedGrid articles={articles} />
+        <FeaturedGrid articles={FeaturedArticles} />
       </section>
       <div className="grid grid-cols-12 gap-8 mt-8">
         {/* Main Content */}
@@ -26,7 +27,22 @@ export default async function Home() {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-semibold">Latest News</h2>
               </div>
-              {/* <LatestNews /> */}
+              <div className="container mb-8">
+                <PageRange
+                  collection="posts"
+                  currentPage={posts.page}
+                  limit={12}
+                  totalDocs={posts.totalDocs}
+                />
+              </div>
+
+              <CollectionArchive posts={posts.docs} />
+
+              <div className="container">
+                {posts.totalPages > 1 && posts.page && (
+                  <Pagination page={posts.page} totalPages={posts.totalPages} />
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -34,8 +50,7 @@ export default async function Home() {
         {/* Sidebar */}
         <aside className="col-span-12 lg:col-span-4 space-y-8">
           <div className="space-y-8">
-            {/* <TrendingHeadlines />
-            <AdvertisementBanner />
+            {/* <AdvertisementBanner />
             <TrendingHeadlines /> */}
           </div>
         </aside>
@@ -49,15 +64,42 @@ export function generateMetadata(): Metadata {
     title: `Aselef Media and Communication Home`,
   }
 }
+const queryPosts = async () => {
+  const payload = await getPayload({ config: configPromise })
 
-const queryPosts = cache(async () => {
+  const posts = await payload.find({
+    collection: 'posts',
+    depth: 1,
+    limit: 12,
+    overrideAccess: false,
+    // where: {
+    //   isFeatured: {
+    //     equals: false,
+    //   },
+    // },
+    sort: '-createdAt',
+    select: {
+      title: true,
+      slug: true,
+      categories: true,
+      meta: true,
+    },
+  })
+  return posts
+}
+const queryFeaturedPosts = cache(async () => {
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
     collection: 'posts',
     depth: 2,
-    limit: 12,
+    limit: 5,
     overrideAccess: false,
+    where: {
+      isFeatured: {
+        equals: true,
+      },
+    },
     select: {
       id: true,
       title: true,
