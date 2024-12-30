@@ -6,10 +6,10 @@ import React, { useEffect, useState } from 'react'
 
 import type { Header, Category } from '@/payload-types'
 
-import { Logo } from '@/components/Logo/Logo'
+// import { Logo } from '@/components/Logo/Logo'
 import { MobileNav } from './Nav/mobile-nav'
 import { DesktopNav } from './Nav/desktop-nav'
-import { Breadcrumbs } from './Nav/breadcrumbs'
+
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 interface HeaderClientProps {
@@ -54,13 +54,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
   ]
 
   return (
-    <header className="h-40">
+    <header className="bg-brand text-brand-white lg:h-40 h-20">
       <div className="container mx-auto px-4 flex flex-col">
         {/* Top bar - push to top */}
-        <div className="flex items-center h-20 justify-between py-4">
+        <div className="flex items-center h-20 lg:h-30 justify-between py-4">
           <Link
             href="/"
-            className="text-2xl font-bold text-foreground hover:text-foreground/90 transition-colors"
+            className="text-2xl font-bold text-brand-light hover:text-brand-white transition-colors"
           >
             NEWSLETTER
           </Link>
@@ -74,9 +74,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
 
         <div className="py-2 h-10 flex-1">
           <DesktopNav items={navItems} />
-        </div>
-        <div className="py-2 h-10 flex-shrink-0">
-          <Breadcrumbs />
         </div>
       </div>
     </header>

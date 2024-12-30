@@ -26,6 +26,8 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { toggleFeatureHook } from './hooks/toggleFeature'
+import { timeToReadHook } from './hooks/timeToRead'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -91,6 +93,7 @@ export const Posts: CollectionConfig<'posts'> = {
       admin: {
         position: 'sidebar',
         description: 'Estimated time to read in minutes',
+        readOnly: true,
       },
     },
     {
@@ -100,6 +103,7 @@ export const Posts: CollectionConfig<'posts'> = {
       admin: {
         position: 'sidebar',
         description: 'Number of visitors who have read this post',
+        readOnly: true,
       },
     },
     {
@@ -251,6 +255,7 @@ export const Posts: CollectionConfig<'posts'> = {
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
+    beforeChange: [toggleFeatureHook, timeToReadHook],
   },
   versions: {
     drafts: {

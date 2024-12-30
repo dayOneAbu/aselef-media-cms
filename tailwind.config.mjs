@@ -93,6 +93,46 @@ export default {
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
+        brand: {
+          white: '#FFFFFF',
+          dark: '#00171F', // Dark Navy
+          DEFAULT: '#003459', // Rich Blue
+          light: '#ADEBFF', // Light Blue
+        },
+      },
+      backgroundColor: {
+        brand: {
+          white: '#FFFFFF',
+          dark: '#00171F',
+          DEFAULT: '#003459',
+          light: '#ADEBFF',
+          'light/10': 'rgba(173, 235, 255, 0.1)',
+          'light/20': 'rgba(173, 235, 255, 0.2)',
+        },
+      },
+      borderColor: {
+        brand: {
+          white: '#FFFFFF',
+          dark: '#00171F',
+          DEFAULT: '#003459',
+          light: '#ADEBFF',
+        },
+      },
+      ringColor: {
+        brand: {
+          white: '#FFFFFF',
+          dark: '#00171F',
+          DEFAULT: '#003459',
+          light: '#ADEBFF',
+        },
+      },
+      textColor: {
+        brand: {
+          white: '#FFFFFF',
+          dark: '#00171F',
+          DEFAULT: '#003459',
+          light: '#ADEBFF',
+        },
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],

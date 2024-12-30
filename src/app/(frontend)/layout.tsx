@@ -49,7 +49,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header categories={categories} />
-          <span className="flex-1 mt-8">{children}</span>
+          <span className="flex-1">{children}</span>
           <Footer categories={categories} />
         </Providers>
       </body>

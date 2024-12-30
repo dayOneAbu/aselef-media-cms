@@ -6,12 +6,12 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-export const ImageWithText: Block = {
-  slug: 'imageWithText',
-  interfaceName: 'ImageWithText',
+const TextImageGridBlock: Block = {
+  slug: 'textImageGrid',
+  interfaceName: 'TextImageGridBlock',
   labels: {
-    singular: 'Image with Text Block',
-    plural: 'Image with Text Blocks',
+    singular: 'Text Image Grid Block',
+    plural: 'Text Image Grid Blocks',
   },
   fields: [
     {
@@ -25,15 +25,7 @@ export const ImageWithText: Block = {
       options: [
         { label: 'Text Right', value: 'textRight' },
         { label: 'Text Left', value: 'textLeft' },
-        { label: 'Text Overlay', value: 'textOverlay' },
       ],
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-      label: 'Image',
     },
     {
       name: 'text',
@@ -50,14 +42,11 @@ export const ImageWithText: Block = {
         ],
       }),
       label: 'Text Content',
-      admin: {
-        description: 'Add the text content that will appear alongside the image',
-      },
     },
     {
       name: 'textColor',
       type: 'select',
-      label: 'Text Color',
+      defaultValue: 'dark',
       options: [
         { label: 'Dark', value: 'dark' },
         { label: 'Light', value: 'light' },
@@ -65,16 +54,36 @@ export const ImageWithText: Block = {
       ],
     },
     {
-      name: 'imageSize',
-      type: 'select',
-      label: 'Image Size',
-      defaultValue: 'medium',
-      options: [
-        { label: 'Small', value: 'small' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'Large', value: 'large' },
-        { label: 'Full Width', value: 'full' },
+      name: 'images',
+      type: 'array',
+      label: 'Image Grid',
+      maxRows: 4,
+      minRows: 1,
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'size',
+          type: 'select',
+          defaultValue: 'regular',
+          options: [
+            {
+              label: 'Regular',
+              value: 'regular',
+            },
+            {
+              label: 'Large',
+              value: 'large',
+            },
+          ],
+        },
       ],
     },
   ],
 }
+
+export { TextImageGridBlock }

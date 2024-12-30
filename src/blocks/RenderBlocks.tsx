@@ -9,6 +9,7 @@ import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ImageWithTextBlock } from '@/blocks/ImageWithText/Component'
 import { ContactSplitBlock } from '@/blocks/ContactSplit/Component'
+import { ImageGridTextBlock } from './TextImageGrid/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -18,6 +19,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   imageWithText: ImageWithTextBlock,
   contactSplit: ContactSplitBlock,
+  textImageGrid: ImageGridTextBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -33,13 +35,16 @@ export const RenderBlocks: React.FC<{
         {blocks.map((block, index) => {
           const { blockType } = block
 
+          console.log('Block type:', blockType)
+          console.log('Available components:', Object.keys(blockComponents))
+
           if (blockType && blockType in blockComponents) {
             const Block = blockComponents[blockType]
 
             if (Block) {
               return (
-                <div className="my-16" key={index}>
-                  <Block {...block} disableInnerContainer />
+                <div className="my-16 mx-auto max-w-7xl" key={index}>
+                  <Block {...block} />
                 </div>
               )
             }

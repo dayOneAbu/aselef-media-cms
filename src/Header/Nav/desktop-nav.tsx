@@ -37,7 +37,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
                 <Link
                   href={item.link.href}
                   className={cn(
-                    'text-foreground transition-colors flex-shrink-0',
+                    'text-brand-white transition-colors flex-shrink-0',
                     'text-base lg:text-lg',
                     'hover:text-foreground/80',
                     'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2',

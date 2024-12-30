@@ -20,11 +20,15 @@ export const Text: React.FC<
 > = ({ name, defaultValue, errors, label, register, required: requiredFromProps, width }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name} className="text-brand font-medium mb-2">
+        {label}
+        {requiredFromProps && <span className="text-brand-dark ml-1">*</span>}
+      </Label>
       <Input
         defaultValue={defaultValue}
         id={name}
         type="text"
+        className="border-brand focus:ring-2 focus:ring-brand-light focus:border-brand"
         {...register(name, { required: requiredFromProps })}
       />
       {requiredFromProps && errors[name] && <Error />}

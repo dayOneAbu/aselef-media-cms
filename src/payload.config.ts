@@ -147,6 +147,6 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   graphQL: {
-    schemaOutputFile: path.resolve(__dirname, 'payload-types.ts'),
+    schemaOutputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 })

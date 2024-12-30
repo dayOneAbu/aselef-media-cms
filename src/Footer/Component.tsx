@@ -32,7 +32,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
             <h4 className="font-semibold mb-2">Company</h4>
             <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
               {navItems.map(({ link }, i) => {
-                return <CMSLink className="text-white" key={i} {...link} />
+                return <CMSLink className=" " key={i} {...link} />
               })}
             </nav>
           </div>
@@ -51,13 +51,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
             <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
               {socialNavItems.map(({ label, url }, i) => {
                 return (
-                  <CMSLink
-                    className="text-white capitalize"
-                    key={i}
-                    label={label}
-                    url={url}
-                    newTab={true}
-                  />
+                  <CMSLink className="  capitalize" key={i} label={label} url={url} newTab={true} />
                 )
               })}
             </nav>

@@ -8,6 +8,7 @@ import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { ImageWithText } from '../../blocks/ImageWithText/config'
+
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -22,6 +23,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { ContactSplit } from '@/blocks/ContactSplit/config'
+import { TextImageGridBlock } from '@/blocks/TextImageGrid/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -85,6 +87,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FormBlock,
                 ImageWithText,
                 ContactSplit,
+                TextImageGridBlock,
               ],
               required: true,
               admin: {

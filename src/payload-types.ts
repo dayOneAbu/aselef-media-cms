@@ -134,6 +134,8 @@ export interface Page {
     | ArchiveBlock
     | FormBlock
     | ImageWithText
+    | ContactSplitBlock
+    | TextImageGridBlock
   )[];
   meta?: {
     title?: string | null;
@@ -408,6 +410,9 @@ export interface Category {
 export interface Post {
   id: number;
   title: string;
+  isFeatured?: boolean | null;
+  timeToRead?: number | null;
+  visitorsRead?: number | null;
   heroImage?: (number | null) | Media;
   content: {
     root: {
@@ -658,7 +663,7 @@ export interface Form {
  * via the `definition` "ImageWithText".
  */
 export interface ImageWithText {
-  layout: 'textRight' | 'textLeft' | 'textAbove' | 'textBelow' | 'textOverlay';
+  layout: 'textRight' | 'textLeft' | 'textOverlay';
   image: number | Media;
   text: {
     root: {
@@ -675,15 +680,91 @@ export interface ImageWithText {
     };
     [k: string]: unknown;
   };
-  backgroundColor?: ('none' | 'gold' | 'purple' | 'black') | null;
   textColor?: ('dark' | 'light' | 'primary') | null;
   imageSize?: ('small' | 'medium' | 'large' | 'full') | null;
-  padding?: ('none' | 'small' | 'medium' | 'large') | null;
-  vOffset?: ('none' | '16' | '32' | '48') | null;
-  hOffset?: ('none' | '16' | '32' | '48') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'imageWithText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSplitBlock".
+ */
+export interface ContactSplitBlock {
+  layout: 'formRight' | 'formLeft';
+  form: number | Form;
+  columns?:
+    | {
+        size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        alignment: 'left' | 'center' | 'right';
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: number | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  backgroundColor?: ('none' | 'gold' | 'purple' | 'black') | null;
+  padding?: ('none' | 'small' | 'medium' | 'large') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactSplit';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageGridBlock".
+ */
+export interface TextImageGridBlock {
+  layout: 'textRight' | 'textLeft';
+  text: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  textColor?: ('dark' | 'light' | 'primary') | null;
+  images?:
+    | {
+        image: number | Media;
+        size?: ('regular' | 'large') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textImageGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -882,6 +963,8 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         imageWithText?: T | ImageWithTextSelect<T>;
+        contactSplit?: T | ContactSplitBlockSelect<T>;
+        textImageGrid?: T | TextImageGridBlockSelect<T>;
       };
   meta?:
     | T
@@ -981,12 +1064,57 @@ export interface ImageWithTextSelect<T extends boolean = true> {
   layout?: T;
   image?: T;
   text?: T;
-  backgroundColor?: T;
   textColor?: T;
   imageSize?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSplitBlock_select".
+ */
+export interface ContactSplitBlockSelect<T extends boolean = true> {
+  layout?: T;
+  form?: T;
+  columns?:
+    | T
+    | {
+        size?: T;
+        alignment?: T;
+        richText?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  backgroundColor?: T;
   padding?: T;
-  vOffset?: T;
-  hOffset?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageGridBlock_select".
+ */
+export interface TextImageGridBlockSelect<T extends boolean = true> {
+  layout?: T;
+  text?: T;
+  textColor?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        size?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -996,6 +1124,9 @@ export interface ImageWithTextSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  isFeatured?: T;
+  timeToRead?: T;
+  visitorsRead?: T;
   heroImage?: T;
   content?: T;
   relatedPosts?: T;
