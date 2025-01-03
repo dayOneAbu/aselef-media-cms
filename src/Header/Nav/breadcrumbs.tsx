@@ -38,7 +38,7 @@ export function Breadcrumbs() {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const pathname = usePathname()
-  console.log(pathname)
+
   const items =
     pathname === '/'
       ? [{ href: '/', label: 'Home' }]

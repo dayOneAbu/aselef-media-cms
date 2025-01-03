@@ -1,10 +1,10 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { cache } from 'react'
 import { FeaturedGrid } from '@/components/featured-news/featured-grid'
-import { Category, FeaturedPost } from '@/components/featured-news/types'
+import type { Category, FeaturedPost } from '@/components/featured-news/types'
 import { PageRange } from '@/components/PageRange'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
@@ -61,7 +61,7 @@ export default async function Home() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Aselef Media and Communication Home`,
+    title: 'Aselef Media and Communication Home',
   }
 }
 const queryPosts = async () => {
@@ -79,10 +79,15 @@ const queryPosts = async () => {
     // },
     sort: '-createdAt',
     select: {
+      id: true,
       title: true,
       slug: true,
       categories: true,
       meta: true,
+      heroImage: true,
+      timeToRead: true,
+      publishedAt: true,
+      visitorsRead: true,
     },
   })
   return posts

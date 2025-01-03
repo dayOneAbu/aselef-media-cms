@@ -26,14 +26,14 @@ const sizeConfig = {
     aspectRatio: 16 / 9,
     titleClass: 'text-base sm:text-lg md:text-xl lg:text-2xl',
     padding: 'p-3 sm:p-4 md:p-5',
-    showExcerpt: false,
+    showExcerpt: true,
     showImage: 'responsive',
   },
   small: {
     aspectRatio: 16 / 9,
     titleClass: 'text-sm sm:text-base md:text-lg',
     padding: 'p-2 sm:p-3 md:p-4',
-    showExcerpt: false,
+    showExcerpt: true,
     showImage: false,
   },
 }

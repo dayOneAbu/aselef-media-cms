@@ -4,8 +4,6 @@ import { CollectionArchive } from '../CollectionArchive'
 interface PostGridProps {
   title: string
   posts: Post[]
-  showMoreButton?: boolean
-  onShowMore?: () => void
 }
 
 export function PostGrid({ posts }: PostGridProps) {

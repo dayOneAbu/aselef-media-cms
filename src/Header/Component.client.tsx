@@ -6,11 +6,11 @@ import React, { useEffect, useState } from 'react'
 
 import type { Header, Category } from '@/payload-types'
 
-// import { Logo } from '@/components/Logo/Logo'
 import { MobileNav } from './Nav/mobile-nav'
 import { DesktopNav } from './Nav/desktop-nav'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { Logo } from '@/components/Logo/Logo'
 
 interface HeaderClientProps {
   categories: Category[]
@@ -62,8 +62,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
             href="/"
             className="text-2xl font-bold text-brand-light hover:text-brand-white transition-colors"
           >
-            NEWSLETTER
+            ASELEF MEDIA COMMUNICATION
           </Link>
+
           <div className="flex items-center gap-4">
             <div className="lg:mr-14 text-foreground">
               <ThemeSelector />

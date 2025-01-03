@@ -2,19 +2,19 @@ import { PostGrid } from '@/components/PostGrid'
 
 import configPromise from '@payload-config'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { cache } from 'react'
 import { getPayload } from 'payload'
 
-import { Post } from '@/payload-types'
+import type { Post } from '@/payload-types'
 
 import { HeroImageGrid } from '@/components/HeroSection'
+import { Pagination } from '@/components/Pagination'
 
 export default async function CategoryPage({ params }) {
-  console.log('first')
   const { slug } = await params
 
-  const url = '/categories/' + slug
+  const url = `/categories/${slug}`
   const posts = await queryPostsByCategory({ slug })
 
   if (!posts) return <PayloadRedirects url={url} />
@@ -23,24 +23,25 @@ export default async function CategoryPage({ params }) {
     <div className="container mx-auto p-4 space-y-8">
       <PayloadRedirects disableNotFound url={url} />
       <HeroImageGrid
-        title="Discover the World's News 24/7"
+        title="Discover Category Name Goes Here 24/7"
         description="Find unique moments and news."
-        image='/ezgif.com-gif-maker (1).webp'
-        layout='textLeft'
+        image="/ezgif.com-gif-maker (1).webp"
+        layout="textLeft"
       />
 
-      <PostGrid
-        title="Latest Stories"
-        posts={posts as Post[]}
-        onShowMore={() => console.log('Show more clicked')}
-      />
+      <PostGrid title="Latest Stories" posts={posts.docs as Post[]} />
+      <div className="container">
+        {posts.totalPages > 1 && posts.page && (
+          <Pagination page={posts.page} totalPages={posts.totalPages} />
+        )}
+      </div>
     </div>
   )
 }
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Aselef Media and Communication | Ethiopian News Articles`,
+    title: 'Aselef Media and Communication | Ethiopian News Articles',
   }
 }
 
@@ -68,5 +69,5 @@ const queryPostsByCategory = cache(async ({ slug }: { slug: string }) => {
     },
   })
 
-  return result.docs || null
+  return result
 })

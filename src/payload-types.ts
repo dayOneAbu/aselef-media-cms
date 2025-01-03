@@ -681,7 +681,7 @@ export interface ImageWithText {
     [k: string]: unknown;
   };
   textColor?: ('dark' | 'light' | 'primary') | null;
-  imageSize?: ('small' | 'medium' | 'large' | 'full') | null;
+  imageSize?: ('small' | 'medium' | 'large') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'imageWithText';

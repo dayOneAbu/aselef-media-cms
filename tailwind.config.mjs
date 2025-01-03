@@ -94,16 +94,16 @@ export default {
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
         brand: {
-          white: '#FFFFFF',
-          dark: '#00171F', // Dark Navy
+          white: '##f1f5f9',
+          dark: '##0f172a', // Dark Navy
           DEFAULT: '#003459', // Rich Blue
           light: '#ADEBFF', // Light Blue
         },
       },
       backgroundColor: {
         brand: {
-          white: '#FFFFFF',
-          dark: '#00171F',
+          white: '##f1f5f9',
+          dark: '##0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
           'light/10': 'rgba(173, 235, 255, 0.1)',
@@ -112,24 +112,24 @@ export default {
       },
       borderColor: {
         brand: {
-          white: '#FFFFFF',
-          dark: '#00171F',
+          white: '##f1f5f9',
+          dark: '##0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },
       },
       ringColor: {
         brand: {
-          white: '#FFFFFF',
-          dark: '#00171F',
+          white: '##f1f5f9',
+          dark: '##0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },
       },
       textColor: {
         brand: {
-          white: '#FFFFFF',
-          dark: '#00171F',
+          white: '##f1f5f9',
+          dark: '##0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },

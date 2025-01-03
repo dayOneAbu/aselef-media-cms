@@ -1,10 +1,16 @@
 import type { FieldHook } from 'payload'
 
-export const formatSlug = (val: string): string =>
-  val
-    .replace(/ /g, '-')
-    .replace(/[^\w-]+/g, '')
-    .toLowerCase()
+// export const formatSlug = (val: string): string =>
+//   val
+//     .replace(/ /g, '-')
+//     .replace(/[^\w-]+/g, '')
+//     .toLowerCase()
+export const formatSlug = (val: string): string => {
+  return val
+    .replace(/ /g, '-') // Replace spaces with hyphens
+    .replace(/[^\p{L}\p{N}-]+/gu, '') // Allow all letters, numbers, and hyphens
+    .toLowerCase() // Convert to lowercase// Convert to lowercase
+}
 
 export const formatSlugHook =
   (fallback: string): FieldHook =>

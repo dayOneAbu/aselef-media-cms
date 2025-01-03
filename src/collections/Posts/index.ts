@@ -255,7 +255,7 @@ export const Posts: CollectionConfig<'posts'> = {
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
-    beforeChange: [toggleFeatureHook, timeToReadHook],
+    // beforeChange: [toggleFeatureHook, timeToReadHook],
   },
   versions: {
     drafts: {

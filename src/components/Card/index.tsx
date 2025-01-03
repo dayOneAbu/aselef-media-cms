@@ -3,7 +3,7 @@
 import { cn } from '@/utilities/cn'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
-import React from 'react'
+import type React from 'react'
 import { Clock, ArrowRight, ImageIcon } from 'lucide-react'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
@@ -15,7 +15,7 @@ import { formatDate } from '@/utilities/formatDate'
 
 export type CardPostData = Pick<
   Post,
-  'slug' | 'categories' | 'meta' | 'title' | 'publishedAt' | 'authors'
+  'slug' | 'categories' | 'meta' | 'title' | 'publishedAt' | 'authors' | 'timeToRead'
 >
 
 export const Card: React.FC<{
@@ -27,7 +27,7 @@ export const Card: React.FC<{
   title?: string
   size?: 'default' | 'compact'
 }> = (props) => {
-  const { card, link } = useClickableCard({})
+  const { card } = useClickableCard({})
   const {
     className,
     doc,
@@ -37,14 +37,14 @@ export const Card: React.FC<{
     size = 'default',
   } = props
 
-  const { slug, categories, meta, title, publishedAt, authors } = doc || {}
+  const { slug, categories, meta, title, publishedAt, authors, timeToRead } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ')
   const href = `/${relationTo}/${slug}`
-  const timeToRead = '3 min read'
+
   const author = authors?.[0]
 
   const isCompact = size === 'compact'
@@ -59,14 +59,15 @@ export const Card: React.FC<{
       )}
       ref={card.ref}
     >
-      <div className="relative w-full">
+      <div className="relative w-full pb-4">
         <AspectRatio ratio={isCompact ? 2 : 3 / 2}>
           {!metaImage && (
-            <div className="flex flex-col items-center justify-center h-full bg-muted/20 group-hover:bg-muted/30 transition-colors rounded-t-xl">
+            <div className="flex flex-col  items-center justify-center h-full bg-muted/20 group-hover:bg-muted/30 transition-colors rounded-t-xl">
               <ImageIcon className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground/50" />
               <p className="text-xs sm:text-sm text-muted-foreground mt-2">No image available</p>
             </div>
           )}
+
           {metaImage && typeof metaImage !== 'string' && (
             <Media
               resource={metaImage}
@@ -77,9 +78,9 @@ export const Card: React.FC<{
         </AspectRatio>
       </div>
 
-      <div className={cn('p-3 sm:p-4', isCompact && 'p-2 sm:p-3')}>
+      <div className={cn('p-3 sm:p-4 mt-2', isCompact && 'p-2 sm:p-3')}>
         {showCategories && hasCategories && (
-          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-1.5 sm:mb-2">
+          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2">
             {categories?.map((category, index) => {
               if (typeof category === 'object' && 'title' in category && category.title) {
                 return (
@@ -96,7 +97,7 @@ export const Card: React.FC<{
             })}
             <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1 ml-auto">
               <Clock className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-              {timeToRead}
+              {`${timeToRead} min read`}
             </span>
           </div>
         )}
@@ -109,7 +110,7 @@ export const Card: React.FC<{
                 isCompact ? 'text-sm sm:text-base' : 'text-base sm:text-lg md:text-xl',
               )}
             >
-              <Link href={href} ref={link.ref} className="hover:underline">
+              <Link href={`/posts/${slug}`} className="hover:underline">
                 {titleToUse}
               </Link>
             </h3>

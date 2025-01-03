@@ -73,7 +73,6 @@ export const ImageWithText: Block = {
         { label: 'Small', value: 'small' },
         { label: 'Medium', value: 'medium' },
         { label: 'Large', value: 'large' },
-        { label: 'Full Width', value: 'full' },
       ],
     },
   ],

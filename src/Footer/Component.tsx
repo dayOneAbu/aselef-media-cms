@@ -22,22 +22,22 @@ export async function Footer({ categories }: { categories: Category[] }) {
             <Link className="flex items-center" href="/">
               <Logo />
             </Link>
-            <h3 className="font-bold mb-4">ASELEF MEDIA AND COMMUNICATION</h3>
-            <p className="text-sm text-muted-foreground">
+            {/* <h3 className="font-bold mb-4">ASELEF MEDIA AND COMMUNICATION</h3> */}
+            <p className="text-sm text-left text-muted-foreground">
               © {new Date().getFullYear()} AMC. All rights reserved
             </p>
           </div>
 
-          <div>
-            <h4 className="font-semibold mb-2">Company</h4>
-            <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
+          <div className="mt-4">
+            <h4 className="font-semibold my-2 py-4">Company</h4>
+            <nav className="space-y-2  text-sm flex flex-col md:flex-col gap-4">
               {navItems.map(({ link }, i) => {
                 return <CMSLink className=" " key={i} {...link} />
               })}
             </nav>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Categories</h4>
+            <h4 className="font-semibold my-2 py-4">Categories</h4>
             <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
               {categories.map((cat) => (
                 <Link key={cat.id} href={cat.title}>
@@ -47,7 +47,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
             </nav>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Social Links</h4>
+            <h4 className="font-semibold my-2 py-4">Social Links</h4>
             <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
               {socialNavItems.map(({ label, url }, i) => {
                 return (

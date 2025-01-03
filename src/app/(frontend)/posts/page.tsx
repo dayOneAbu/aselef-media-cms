@@ -20,10 +20,12 @@ export default async function Page() {
     limit: 12,
     overrideAccess: false,
     select: {
+      id: true,
       title: true,
       slug: true,
       categories: true,
       meta: true,
+      heroImage: true,
     },
   })
 
@@ -58,6 +60,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Aselef Media and Communication Posts`,
+    title: 'Aselef Media and Communication Posts',
   }
 }

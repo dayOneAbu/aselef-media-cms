@@ -1,7 +1,5 @@
 import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
 
-import { contactForm as contactFormData } from './contact-form'
-import { contact as contactPageData } from './contact-page'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -263,43 +261,43 @@ export const seed = async ({
     },
   })
 
-  payload.logger.info(`— Seeding contact form...`)
+  // payload.logger.info(`— Seeding contact form...`)
 
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: JSON.parse(JSON.stringify(contactFormData)),
-  })
+  // const contactForm = await payload.create({
+  //   collection: 'forms',
+  //   depth: 0,
+  //   data: JSON.parse(JSON.stringify(contactFormData)),
+  // })
 
-  let contactFormID: number | string = contactForm.id
+  // let contactFormID: number | string = contactForm.id
 
-  if (payload.db.defaultIDType === 'text') {
-    contactFormID = `"${contactFormID}"`
-  }
+  // if (payload.db.defaultIDType === 'text') {
+  //   contactFormID = `"${contactFormID}"`
+  // }
 
-  payload.logger.info(`— Seeding pages...`)
+  // payload.logger.info(`— Seeding pages...`)
 
-  const [_, contactPage] = await Promise.all([
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: JSON.parse(
-        JSON.stringify(home)
-          .replace(/"\{\{IMAGE_1\}\}"/g, String(imageHomeID))
-          .replace(/"\{\{IMAGE_2\}\}"/g, String(image2ID)),
-      ),
-    }),
-    payload.create({
-      collection: 'pages',
-      depth: 0,
-      data: JSON.parse(
-        JSON.stringify(contactPageData).replace(
-          /"\{\{CONTACT_FORM_ID\}\}"/g,
-          String(contactFormID),
-        ),
-      ),
-    }),
-  ])
+  // const [_, contactPage] = await Promise.all([
+  //   payload.create({
+  //     collection: 'pages',
+  //     depth: 0,
+  //     data: JSON.parse(
+  //       JSON.stringify(home)
+  //         .replace(/"\{\{IMAGE_1\}\}"/g, String(imageHomeID))
+  //         .replace(/"\{\{IMAGE_2\}\}"/g, String(image2ID)),
+  //     ),
+  //   }),
+  //   payload.create({
+  //     collection: 'pages',
+  //     depth: 0,
+  //     data: JSON.parse(
+  //       JSON.stringify(contactPageData).replace(
+  //         /"\{\{CONTACT_FORM_ID\}\}"/g,
+  //         String(contactFormID),
+  //       ),
+  //     ),
+  //   }),
+  // ])
 
   payload.logger.info(`— Seeding globals...`)
 
