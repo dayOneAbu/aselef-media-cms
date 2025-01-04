@@ -11,6 +11,9 @@ import type { Post } from '@/payload-types'
 import { HeroImageGrid } from '@/components/HeroSection'
 import { Pagination } from '@/components/Pagination'
 
+export const dynamic = 'force-static'
+export const revalidate = 600
+
 export default async function CategoryPage({ params }) {
   const { slug } = await params
 

@@ -8,7 +8,9 @@ import type { Category, FeaturedPost } from '@/components/featured-news/types'
 import { PageRange } from '@/components/PageRange'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
+export const dynamic = 'force-static'
 
+export const revalidate = 600
 export default async function Home() {
   const FeaturedArticles = await queryFeaturedPosts()
   const posts = await queryPosts()
