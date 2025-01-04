@@ -4,13 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import type { Header, Category } from '@/payload-types'
+import type { Header, Category, Page } from '@/payload-types'
 
 import { MobileNav } from './Nav/mobile-nav'
 import { DesktopNav } from './Nav/desktop-nav'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
-import { Logo } from '@/components/Logo/Logo'
 
 interface HeaderClientProps {
   categories: Category[]
@@ -46,7 +45,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
       link: {
         href:
           item.link?.type === 'reference'
-            ? `/${item.link.reference?.value?.slug}`
+            ? `/${(item.link.reference?.value as Page)?.slug}`
             : item.link?.url || '#',
         label: item.link?.label || '',
       },

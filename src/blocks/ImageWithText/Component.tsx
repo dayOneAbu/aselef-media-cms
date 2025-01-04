@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/utilities/cn'
 import RichText from '@/components/RichText'
+import { SerializedEditorState, SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
 
 // Define types using string literals to match the database schema
 type Layout = 'textRight' | 'textLeft' | 'textOverlay'
@@ -18,7 +19,7 @@ type ImageWithTextBlock = {
         id: string
       }
     | string
-  text: any // Using any for richText content - you might want to type this more strictly
+  text: SerializedEditorState<SerializedLexicalNode> // Using any for richText content - you might want to type this more strictly
   textColor?: TextColor
   imageSize: ImageSize
 }

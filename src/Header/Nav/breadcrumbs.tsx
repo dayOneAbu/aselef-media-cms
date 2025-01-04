@@ -67,10 +67,10 @@ export function Breadcrumbs() {
       <BreadcrumbList className="flex-wrap text-foreground items-center text-sm md:text-base">
         <BreadcrumbItem>
           <BreadcrumbLink
-            href={items[0].href}
+            href={items[0]?.href ?? '#'}
             className="text-sm font-medium hover:text-white/90 transition-colors"
           >
-            {items[0].label}
+            {items[0]?.label}
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -91,10 +91,10 @@ export function Breadcrumbs() {
                     {items.slice(1, -2).map((item, index) => (
                       <DropdownMenuItem key={index}>
                         <Link
-                          href={item.href ?? '#'}
+                          href={item?.href ?? '#'}
                           className="w-full truncate hover:text-white/90"
                         >
-                          {item.label}
+                          {item?.label}
                         </Link>
                       </DropdownMenuItem>
                     ))}
@@ -117,10 +117,10 @@ export function Breadcrumbs() {
                       {items.slice(1, -2).map((item, index) => (
                         <Link
                           key={index}
-                          href={item.href ?? '#'}
+                          href={item?.href ?? '#'}
                           className="py-2 text-sm hover:text-white/90 transition-colors"
                         >
-                          {item.label}
+                          {item?.label}
                         </Link>
                       ))}
                     </div>
@@ -140,7 +140,7 @@ export function Breadcrumbs() {
 
         {items.slice(-ITEMS_TO_DISPLAY + 1).map((item, index) => (
           <BreadcrumbItem key={index}>
-            {item.href ? (
+            {item?.href ? (
               <>
                 <BreadcrumbLink
                   asChild
@@ -153,7 +153,7 @@ export function Breadcrumbs() {
               </>
             ) : (
               <BreadcrumbPage className="max-w-[120px] md:max-w-[200px] truncate text-white">
-                {item.label}
+                {item?.label}
               </BreadcrumbPage>
             )}
           </BreadcrumbItem>

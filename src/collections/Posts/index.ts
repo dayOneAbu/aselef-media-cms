@@ -26,8 +26,6 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
-import { toggleFeatureHook } from './hooks/toggleFeature'
-import { timeToReadHook } from './hooks/timeToRead'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
