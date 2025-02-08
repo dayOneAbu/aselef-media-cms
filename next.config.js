@@ -19,11 +19,10 @@ const nextConfig = {
         }
       }),
     ],
-    // TODO: remove this in prod
-    domains: ['images.unsplash.com'],
   },
   reactStrictMode: true,
   redirects,
+  // output: 'standalone',
 }
 
 export default withPayload(nextConfig)

@@ -10,7 +10,7 @@ import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
 export const dynamic = 'force-static'
 
-export const revalidate = 600
+export const revalidate = 300
 export default async function Home() {
   const FeaturedArticles = await queryFeaturedPosts()
   const posts = await queryPosts()
@@ -74,11 +74,11 @@ const queryPosts = async () => {
     depth: 1,
     limit: 12,
     overrideAccess: false,
-    // where: {
-    //   isFeatured: {
-    //     equals: false,
-    //   },
-    // },
+    where: {
+      isFeatured: {
+        equals: false,
+      },
+    },
     sort: '-createdAt',
     select: {
       id: true,

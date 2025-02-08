@@ -42,7 +42,7 @@ type Args = {
 export default async function Post({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = '' } = await paramsPromise
-  const url = '/posts/' + slug
+  const url = `/posts/${slug}`
 
   const post = await queryPostBySlug({ slug: decodeURIComponent(slug) })
 
@@ -89,17 +89,18 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
 const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
-
   const payload = await getPayload({ config: configPromise })
+
+  // Fetch the post by slug
   const result = await payload.find({
     collection: 'posts',
+    draft,
     limit: 1,
-    overrideAccess: draft,
+    depth: 2,
     pagination: false,
+    overrideAccess: draft,
     where: {
-      slug: {
-        equals: slug,
-      },
+      slug: { equals: slug },
     },
   })
   return result.docs?.[0] || null

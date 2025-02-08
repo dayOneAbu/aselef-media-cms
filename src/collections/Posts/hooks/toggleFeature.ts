@@ -1,4 +1,4 @@
-import { Post } from '@/payload-types'
+import type { Post } from '@/payload-types'
 import type { CollectionBeforeChangeHook } from 'payload'
 export const toggleFeatureHook: CollectionBeforeChangeHook<Post> = async ({
   data,

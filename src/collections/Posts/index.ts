@@ -26,6 +26,8 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
+import { timeToReadHook } from './hooks/timeToRead'
+import { toggleFeatureHook } from './hooks/toggleFeature'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -103,6 +105,13 @@ export const Posts: CollectionConfig<'posts'> = {
         description: 'Number of visitors who have read this post',
         readOnly: true,
       },
+      // hooks: {
+      //   afterRead: [
+      //     ({ data }) => {
+      //       return (data?.visitorsRead ?? 0) + 1
+      //     },
+      //   ],
+      // },
     },
     {
       type: 'tabs',
@@ -253,7 +262,7 @@ export const Posts: CollectionConfig<'posts'> = {
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
-    // beforeChange: [toggleFeatureHook, timeToReadHook],
+    beforeChange: [toggleFeatureHook, timeToReadHook],
   },
   versions: {
     drafts: {

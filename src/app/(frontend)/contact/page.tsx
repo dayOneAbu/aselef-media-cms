@@ -88,7 +88,7 @@ export default function Contact() {
             alt="aselef media office setup"
             width={718}
             height={1230}
-            src="/photo-1559136555-9303baea8ebd-ezgif.com-optiwebp.webp"
+            src="/photo-1559136555-9303baea8ebd-ezgif.webp"
             className="h-auto w-full object-cover sm:h-80 lg:h-full"
             priority
           />

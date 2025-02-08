@@ -61,7 +61,7 @@ const contactInfo = [
 
 export function ContactInfo() {
   return (
-    <div className="space-y-8 grid grid-cols-7  max-w-7xl mx-auto my-8 px-6 lg:px-8">
+    <div className="space-y-8 grid  md:grid-cols-7  max-w-7xl mx-auto my-8 px-6 lg:px-8">
       <div className="items-start flex flex-col justify-center col-span-3">
         <div className="space-y-6  py-4">
           {contactInfo.map((item, index) => (
@@ -105,7 +105,7 @@ export function ContactInfo() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
       </div>
     </div>
   )
