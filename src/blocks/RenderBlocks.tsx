@@ -27,28 +27,6 @@ export const RenderBlocks: React.FC<{
 
   if (hasBlocks) {
     return (
-      // <Fragment>
-      //   {blocks.map((block, index) => {
-      //     const { blockType } = block
-
-      //     console.log('Block type:', blockType)
-      //     console.log('Available components:', Object.keys(blockComponents))
-
-      //     if (blockType && blockType in blockComponents) {
-      //       const Block = blockComponents[blockType]
-
-      //       if (Block) {
-      //         return (
-      //           <div className="my-16 mx-auto max-w-7xl" key={index}>
-      //             <Block {...block} disableInnerContainer />
-      //           </div>
-      //         )
-      //       }
-      //     }
-
-      //     return null
-      //   })}
-      // </Fragment>
       <Fragment>
         {blocks.map((block, index) => {
           const { blockType } = block

@@ -6,32 +6,24 @@ import Image from 'next/image'
 
 const timeline = [
   {
-    name: 'Founded company',
+    name: 'Founded in 2000 G.C',
     description:
-      'Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.',
-    date: 'Aug 2021',
-    dateTime: '2021-08',
+      '15+ Years of Expertise: Proven excellence in advertising, documentary and film production, advocacy campaigns, and media training across print, broadcast, and digital platforms..',
   },
   {
-    name: 'Secured $65m in funding',
+    name: 'Impact-Driven Approach',
     description:
-      'Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.',
-    date: 'Dec 2021',
-    dateTime: '2021-12',
+      'From grassroots initiatives to national programs, we design communication strategies that resonate, educate, and mobilize.',
   },
   {
-    name: 'Released beta',
+    name: 'Multidisciplinary Excellence',
     description:
-      'Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.',
-    date: 'Feb 2022',
-    dateTime: '2022-02',
+      'Our seasoned team of journalists, creatives, and communication specialists delivers tailored solutions for NGOs, government agencies, and private sector partners.',
   },
   {
-    name: 'Global launch of product',
+    name: 'Trusted and Beloved',
     description:
-      'Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.',
-    date: 'Dec 2022',
-    dateTime: '2022-12',
+      'Certified by the Ethiopian Broadcasting Authority and Addis Ababa City Government Culture & Tourism Bureau, ensuring compliance and quality in every project.',
   },
 ]
 
@@ -51,17 +43,18 @@ export default function Example() {
             </h1>
             <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
               <p className="text-lg leading-8 text-brand ">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-                commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna
-                aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                To empower communities, businesses, and institutions through strategic communication
+                that sparks change. We are committed to advancing social development, promoting
+                health initiatives, and equipping professionals with the tools to thrive in an
+                evolving media landscape.
               </p>
             </div>
             <Image
               alt=""
-              src="/teamhero.webp"
+              src="/office-recording-2-women.webp"
               width={1280}
-              height={800}
-              className="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+              height={1080}
+              className="mt-10 aspect-square w-full max-w-lg rounded-2xl object-cover sm:mt-8 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
             />
           </div>
         </div>
@@ -84,11 +77,12 @@ export default function Example() {
       <div className="mx-auto mt-32 max-w-7xl sm:mt-40 sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden text-white bg-gray-900 px-6 py-24 text-center shadow-2xl sm:rounded-3xl sm:px-16">
           <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight  sm:text-4xl">
-            We Go Where Ever the News Takes us
+            Aselef Media & Communications (AMC) <br /> Empowering Voices, Shaping Futures
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text leading-8">
-            Aliquip reprehenderit incididunt amet quis fugiat ut velit. Sit occaecat labore proident
-            cillum in nisi adipisicing officia excepteur tempor deserunt.
+            At AMC, we believe that meaningful work transcends the ordinary. Every project we
+            undertake, every story we tell, and every campaign we design is rooted in our commitment
+            to creating a positive impact.
           </p>
           <div className="mx-auto mt-20 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:max-w-4xl lg:grid-cols-5" />
           <div aria-hidden="true" className="absolute -top-24 right-0 -z-10 transform-gpu blur-3xl">
@@ -108,23 +102,26 @@ export default function Example() {
         <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
             <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-              <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">Our Team</h2>
+              <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
+                Empowering Voices, Shaping Futures
+              </h2>
               <p className="mt-6 text-xl leading-8 ">
-                Quasi est quaerat. Sit molestiae et. Provident ad dolorem occaecati eos iste. Soluta
-                rerum quidem minus ut molestiae velit error quod. Excepturi quidem expedita
-                molestias quas.
+                Since 2008, Aselef Media & Communications (AMC) has been at the forefront of
+                transforming narratives and driving social progress through innovative media and
+                communication solutions.
               </p>
               <p className="mt-6 text-base leading-7 ">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-                commodo. Elit sunt amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit
-                neque reprehenderit.
+                As a trusted private enterprise licensed by the Addis Ababa Trade & Industry
+                Development Bureau and certified by the Ethiopian Broadcasting Authority, we bridge
+                the gap between organizations and their audiences, amplifying messages that inspire
+                action and foster development.
               </p>
             </div>
-            <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
+            {/* <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
               <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
                 <Image
                   alt=""
-                  src="/teamdisc.webp"
+                  src="/voice recording.webp"
                   width={1152}
                   height={842}
                   className="aspect-[7/5] w-full max-w-none rounded-2xl object-cover"
@@ -136,7 +133,7 @@ export default function Example() {
                     alt=""
                     width={768}
                     height={604}
-                    src="/teambeach.webp"
+                    src="/two-men-working.webp"
                     className="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
                   />
                 </div>
@@ -145,7 +142,7 @@ export default function Example() {
                     alt=""
                     width={1152}
                     height={842}
-                    src="/play.webp"
+                    src="/office-2-equip.webp"
                     className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
                   />
                 </div>
@@ -154,8 +151,48 @@ export default function Example() {
                     alt=""
                     width={768}
                     height={604}
-                    src="/couch.webp"
+                    src="/audio-recorder.webp"
                     className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+                  />
+                </div>
+              </div>
+            </div> */}
+            <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
+              <div className="hidden md:flex w-full lg:w-auto lg:flex-none lg:self-end">
+                <Image
+                  alt=""
+                  src="/voice recording.webp"
+                  width={1152}
+                  height={842}
+                  className="aspect-[7/5] w-full max-w-none rounded-2xl object-cover"
+                />
+              </div>
+              <div className="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
+                <div className="order-first flex w-full flex-none justify-end self-end sm:w-64 lg:w-auto">
+                  <Image
+                    alt=""
+                    width={768}
+                    height={604}
+                    src="/two-men-working.webp"
+                    className="aspect-[4/3] w-full sm:w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+                  />
+                </div>
+                <div className="flex w-full flex-auto justify-end sm:w-96 lg:w-auto lg:flex-none">
+                  <Image
+                    alt=""
+                    width={1152}
+                    height={842}
+                    src="/office-2-equip.webp"
+                    className="aspect-[7/5] w-full sm:w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
+                  />
+                </div>
+                <div className="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
+                  <Image
+                    alt=""
+                    width={768}
+                    height={604}
+                    src="/audio-recorder.webp"
+                    className="aspect-[4/3] w-full sm:w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                   />
                 </div>
               </div>
@@ -172,7 +209,7 @@ export default function Example() {
               alt=""
               width={1104}
               height={80}
-              src="/office sertup.webp"
+              src="/sound-effect.webp"
               className="mt-16 aspect-[6/5] w-full rounded-2xl bg-gray-50 object-cover lg:aspect-auto lg:h-[34.5rem]"
             />
           </div>
@@ -181,8 +218,10 @@ export default function Example() {
               We approach the workplace as something that adds to our lives and adds value to world.
             </h2>
             <p className="mt-6 text-xl leading-8 ">
-              Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non
-              placerat nam arcu. Cras purus nibh cursus sit eu in id.
+              Our workplace is more than a space—it’s a platform for collaboration, creativity, and
+              purpose, where every effort contributes to a better, more connected world. Through
+              innovative media and communication strategies, we empower communities, drive social
+              development, and inspire change.
             </p>
           </div>
         </div>

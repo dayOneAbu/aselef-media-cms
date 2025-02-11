@@ -14,7 +14,6 @@ technologies:
         - 'cmdk@latest'
     - forms: '@hookform/resolvers@latest'
     - validation: 'zod@latest'
-  
   backend:
     - cms: 'payload@3.9.0'
     - auth:

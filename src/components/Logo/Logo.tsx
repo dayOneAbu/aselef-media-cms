@@ -24,8 +24,8 @@ export const Logo = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-32', className)}
-      src="/aselefHeaderLogo.webp"
+      className={clsx('max-w-[9.375rem] w-full h-20 lg:h-32', className)}
+      src="/AMCRevised-logo with whitebg-Photoroom.png"
     />
   )
 }

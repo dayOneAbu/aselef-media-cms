@@ -5,6 +5,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
+import { Separator } from '@radix-ui/react-select'
 import Link from 'next/link'
 import { cn } from 'src/utilities/cn'
 
@@ -26,7 +27,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
           if (item.type === 'separator') {
             return (
               <NavigationMenuItem key={`sep-${i}`}>
-                <span className="text-foreground/60">|</span>
+                <span className="text-white">|</span>
               </NavigationMenuItem>
             )
           }

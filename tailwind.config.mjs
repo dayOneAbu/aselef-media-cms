@@ -95,17 +95,17 @@ export default {
         warning: 'hsl(var(--warning))',
         brand: {
           white: '##f1f5f9',
-          dark: '##0f172a', // Dark Navy
-          DEFAULT: '#003459', // Rich Blue
-          light: '#ADEBFF', // Light Blue
+          dark: '##2244f7', // Dark Navy
+          DEFAULT: '#0f172a', // Rich Blue
+          light: '#55d2fb', // Light Blue
         },
       },
       backgroundColor: {
         brand: {
           white: '##f1f5f9',
-          dark: '##0f172a',
-          DEFAULT: '#003459',
-          light: '#ADEBFF',
+          dark: '##2244f7',
+          DEFAULT: '#0f172a',
+          light: '#55d2fb',
           'light/10': 'rgba(173, 235, 255, 0.1)',
           'light/20': 'rgba(173, 235, 255, 0.2)',
         },

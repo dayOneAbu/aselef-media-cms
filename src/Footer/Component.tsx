@@ -2,14 +2,14 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 import React from 'react'
 
-import type { Category, Footer, SocialMedia } from '@/payload-types'
+import type { Category, Footer as FooterTypes, SocialMedia } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 
 export async function Footer({ categories }: { categories: Category[] }) {
   const socialData: SocialMedia = await getCachedGlobal('social-media', 1)()
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
+  const footerData: FooterTypes = await getCachedGlobal('footer', 1)()
 
   const navItems = footerData?.navItems || []
   const socialNavItems = socialData?.links || []

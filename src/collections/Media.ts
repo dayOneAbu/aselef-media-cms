@@ -86,7 +86,7 @@ export const Media: CollectionConfig = {
         height: 1024,
       },
       {
-        name: 'square',
+        name: 'big-square',
         width: 1200,
         height: 1200,
       },

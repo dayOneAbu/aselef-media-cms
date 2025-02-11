@@ -156,6 +156,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -233,6 +234,14 @@ export interface Media {
       filename?: string | null;
     };
     portrait?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    'big-square'?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -1025,6 +1034,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1120,6 +1130,16 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         portrait?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        'big-square'?:
           | T
           | {
               url?: T;

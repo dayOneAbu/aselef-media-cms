@@ -10,6 +10,7 @@ import { MobileNav } from './Nav/mobile-nav'
 import { DesktopNav } from './Nav/desktop-nav'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { Logo } from '@/components/Logo/Logo'
 
 interface HeaderClientProps {
   categories: Category[]
@@ -53,26 +54,27 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
   ]
 
   return (
-    <header className="bg-brand text-brand-white lg:h-40 h-20">
+    <header className="bg-brand py-4 lg:h-48 h-24">
       <div className="container mx-auto px-4 flex flex-col">
-        {/* Top bar - push to top */}
-        <div className="flex items-center h-20 lg:h-30 justify-between py-4">
+        {/* Top bar */}
+        <div className="flex flex-row items-center justify-between py-4 h-24 lg:h-30">
           <Link
             href="/"
-            className="text-2xl font-bold text-brand-light hover:text-brand-white transition-colors"
+            className="text-2xl w -2/3 font-bold transition-colors flex-shrink-0 lg:text-center lg:w-auto"
           >
-            ASELEF MEDIA COMMUNICATION
+            <Logo />
           </Link>
 
-          <div className="flex items-center gap-4">
-            <div className="lg:mr-14 text-foreground">
-              <ThemeSelector />
+          <div className="flex flex-row lg:mr-14">
+            <ThemeSelector />
+            <div className="lg:hidden py-2 w -1/3">
+              <MobileNav items={navItems} />
             </div>
-            <MobileNav items={navItems} />
           </div>
         </div>
 
-        <div className="py-2 h-10 flex-1">
+        {/* Desktop Navigation - under the logo on desktop */}
+        <div className="py-2 lg:h-auto flex mt-4 flex-col lg:flex-row justify-center lg:justify-between lg:gap-8">
           <DesktopNav items={navItems} />
         </div>
       </div>

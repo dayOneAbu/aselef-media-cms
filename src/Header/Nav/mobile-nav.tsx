@@ -26,7 +26,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="lg:hidden">
-          <Menu className="h-6 w-6" />
+          <Menu className="h-6 text-white w-6" />
           <span className="sr-only">Toggle menu</span>
         </Button>
       </SheetTrigger>

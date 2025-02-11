@@ -7,55 +7,66 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  Mailbox,
 } from 'lucide-react'
 
 const socialLinks = [
   {
     name: 'Facebook',
     icon: Facebook,
-    href: 'https://facebook.com',
+    href: '#',
     color: 'hover:text-blue-600',
   },
   {
     name: 'Twitter',
     icon: Twitter,
-    href: 'https://twitter.com',
+    href: '#',
     color: 'hover:text-blue-400',
   },
   {
     name: 'Instagram',
     icon: Instagram,
-    href: 'https://instagram.com',
+    href: '#',
     color: 'hover:text-pink-600',
   },
   {
     name: 'LinkedIn',
     icon: Linkedin,
-    href: 'https://linkedin.com',
+    href: '#',
     color: 'hover:text-blue-700',
   },
 ]
-
+// +251 911 159 315, +251 911 135 234 (Address: Arada Sub City, Wereda 1, House No: 1239A, P.O.Box 26344, Addis Ababa, Ethiopia)
 const contactInfo = [
   {
     icon: Building2,
     label: 'Company Name',
-    value: 'Acme Corporation',
+    value: 'Aselef Media & Communications (AMC)',
   },
   {
     icon: MapPin,
     label: 'Address',
-    value: '123 Business Ave, New York, NY 10001',
+    value: 'Arada Sub City, Wereda 1, House No: 1239A',
   },
   {
     icon: Phone,
     label: 'Phone',
-    value: '+1 (555) 123-4567',
+    value: '+251 911 15 93 15',
+  },
+  {
+    icon: Phone,
+    label: 'Phone 2',
+    value: '+251 911 13 52 34',
   },
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@acmecorp.com',
+    value: 'amceth@gmail.com',
+  },
+  {
+    icon: Mailbox,
+    label: 'P.O.Box',
+    value: '26344, Addis Ababa, Ethiopia',
   },
 ]
 

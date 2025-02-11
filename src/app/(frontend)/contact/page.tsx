@@ -45,50 +45,24 @@ export default function Contact() {
       <div className="w-full">
         <div className="relative isolate overflow-hidden py-32 sm:py-40 px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight  sm:text-6xl">Contact Us</h2>
+            <h2 className="text-4xl font-bold tracking-tight  sm:text-6xl">
+              Let’s Amplify Your Message Together
+            </h2>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-              commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+              At Aselef Media & Communications (AMC), collaboration is the cornerstone of progress.
+              Whether you’re an NGO aiming to scale your advocacy, or a business ready to elevate
+              your brand, we’re here to craft communication strategies that deliver results.
             </p>
           </div>
         </div>
       </div>
-
-      {/* <div className="relative min-h-[70vh]  border-red-500 border-4 container mx-auto">
-        <div className="relative z-30 pt-28 lg:w-2/3">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Lorem, ipsum dolor sit amet consectetur
-          </h1>
-          <p className="mt-6 text-lg text-gray-600">
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-            commodo.
-          </p>
-          <div className="mt-8 flex space-x-4">
-            <Link href={'/'}>
-              <Button asChild variant="link">
-                Start reading
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <div className="absolute inset-y-0 right-0 w-1/2">
-          <Image
-            width={718}
-            height={1230}
-            src="/aselefHeaderLogo.webp"
-            alt="aselef media office setup"
-            className="object-cover h-full w-full"
-            priority
-          />
-        </div>
-      </div> */}
       <div className="relative container">
         <div className="relative lg:absolute lg:inset-0 lg:left-1/2 ">
           <Image
             alt="aselef media office setup"
             width={718}
             height={1230}
-            src="/photo-1559136555-9303baea8ebd-ezgif.webp"
+            src="/office-picture-aselef-media-resize.webp"
             className="h-auto w-full object-cover sm:h-80 lg:h-full"
             priority
           />
@@ -98,11 +72,13 @@ export default function Contact() {
           <div className="px-6 lg:px-8">
             <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
               <h2 className="text-3xl text-white font-bold tracking-tight">
-                Let&apos;s work together
+                Ready to Make an Impact?
               </h2>
               <p className="mt-2 text-lg leading-8 text-muted-foreground">
-                Proin volutpat consequat porttitor cras nullam gravida at orci molestie a eu arcu
-                sed ut tincidunt magna.
+                Fill out the form below, and our team will connect with you to discuss how AMC can
+                help you achieve your goals. Let’s create stories that matter, campaigns that
+                inspire, and training that empowers. <br />
+                <span className="mt-4 text-white">Your Vision. Our Expertise. Shared Success.</span>
               </p>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="mt-16">
