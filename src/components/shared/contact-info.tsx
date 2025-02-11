@@ -109,7 +109,7 @@ export function ContactInfo() {
       <div className="my-6 col-span-4">
         <iframe
           title="Location Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.158782206669!2d38.76213471133179!3d8.957512790065215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b838eb08fb8fb%3A0xa18a95b96d41fa49!2sSaris%20Adey%20Abeba!5e0!3m2!1sen!2set!4v1735910869809!5m2!1sen!2set"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d279.7641111695!2d38.74650187970678!3d9.032616424441535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85f9ddb7397f%3A0xc2454eeb8e20ad36!2zSHVsdSBBbGVtIENvbW1lcmNpYWwgQ2VudGVyIHwgUGlhenphIHwg4YiB4YiJIOGKoOGIiOGInSDhi6jhjIjhiaDhi6sg4Yib4YuV4Yqo4YiNIHwg4Y2S4Yur4Yiz!5e0!3m2!1sam!2set!4v1739270269872!5m2!1sam!2set"
           width="600"
           height="450"
           className="w-full min-h-[60vh] h-full"

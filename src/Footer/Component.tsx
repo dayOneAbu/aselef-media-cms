@@ -5,7 +5,7 @@ import React from 'react'
 import type { Category, Footer as FooterTypes, SocialMedia } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
+import { LogoFooter } from '@/components/Logo/Logo'
 
 export async function Footer({ categories }: { categories: Category[] }) {
   const socialData: SocialMedia = await getCachedGlobal('social-media', 1)()
@@ -20,7 +20,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <Link className="flex items-center" href="/">
-              <Logo />
+              <LogoFooter />
             </Link>
             {/* <h3 className="font-bold mb-4">ASELEF MEDIA AND COMMUNICATION</h3> */}
             <p className="text-sm text-left text-muted-foreground">

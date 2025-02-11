@@ -1,11 +1,12 @@
 import type { Post } from '@/payload-types'
 import type { CollectionBeforeChangeHook } from 'payload'
+
 export const toggleFeatureHook: CollectionBeforeChangeHook<Post> = async ({
   data,
   req,
   req: { payload },
 }) => {
-  if (data) {
+  if (data?.isFeatured) {
     const featuredPosts = await payload.find({
       collection: 'posts',
       where: {
@@ -14,7 +15,7 @@ export const toggleFeatureHook: CollectionBeforeChangeHook<Post> = async ({
         },
       },
       limit: 5,
-      sort: '-publishedAt',
+      sort: '-publishedAt', // Make sure you're sorting by the correct field
     })
 
     if (featuredPosts.totalDocs >= 5) {

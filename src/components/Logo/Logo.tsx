@@ -29,6 +29,26 @@ export const Logo = (props: Props) => {
     />
   )
 }
+export const LogoFooter = (props: Props) => {
+  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
+
+  const loading = loadingFromProps || 'lazy'
+  const priority = priorityFromProps || 'low'
+
+  return (
+    /* eslint-disable @next/next/no-img-element */
+    <img
+      alt="Aselef Media Corporation Logo"
+      width={193}
+      height={38}
+      loading={loading}
+      fetchPriority={priority}
+      decoding="async"
+      className={clsx('max-w-[9.375rem] w-full h-20 lg:h-32', className)}
+      src="/ezgif.com-gif-maker.webp"
+    />
+  )
+}
 export const AdminLogo = () => {
   return (
     <div className="flex  justify-center items-center gap-2">

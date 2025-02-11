@@ -32,7 +32,7 @@ export default buildConfig({
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      beforeLogin: ['@/components/BeforeLogin'],
+      // beforeLogin: ['@/components/BeforeLogin'],
       // TODO: remove this
       graphics: {
         Logo: {
@@ -46,7 +46,7 @@ export default buildConfig({
       },
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      // beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -77,9 +77,6 @@ export default buildConfig({
     //white label
     meta: {
       titleSuffix: '- AMC',
-      // TODO
-      // favicon: '/assets/favicon.svg',
-      // ogImage: '/assets/logo.svg',
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
