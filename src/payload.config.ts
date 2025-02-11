@@ -145,7 +145,7 @@ export default buildConfig({
         // },
         media: {
           generateFileURL: (file) => {
-            return `https://${process.env.S3_BUCKET}.${process.env.S3_ENDPOINT}/${file.id}`
+            return `https://${process.env.S3_BUCKET}.${process.env.S3_ENDPOINT}/${file.filename}`
           },
           prefix: 'media',
         },
