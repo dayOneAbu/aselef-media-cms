@@ -140,14 +140,12 @@ export default buildConfig({
     s3Storage({
       collections: {
         // media: true,
-        // 'media-with-prefix': {
-        //   prefix,
-        // },
         media: {
-          generateFileURL: (file) => {
-            return `https://${process.env.S3_BUCKET}.${process.env.S3_ENDPOINT}/${file.filename}`
-          },
+          // generateFileURL: (file) => {
+          //   return `http://${process.env.S3_BUCKET}.${process.env.S3_ENDPOINT}/${file.filename}`
+          // },
           prefix: 'media',
+          disableLocalStorage: true,
         },
       },
       bucket: process.env.S3_BUCKET,
@@ -157,9 +155,15 @@ export default buildConfig({
           secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
         },
         region: process.env.S3_REGION,
-        endpoint: `https://${process.env.S3_ENDPOINT}`,
+        endpoint: process.env.S3_ENDPOINT,
+        forcePathStyle: true, // Ensures MinIO works properly
+        // tls: false, // Ignores self-signed certs
+        // logger: console,
         // ... Other S3 configuration
       },
+      acl: 'private',
+      enabled: true,
+      disableLocalStorage: true,
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,

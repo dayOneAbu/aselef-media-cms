@@ -35,8 +35,6 @@ import { RowLabel as RowLabel_1f6ff6ff633e3695d348f4f3c58f1466 } from '@/Footer/
 import { AccountIcon as AccountIcon_218e034a70ff3eab0fb4c18e5b33717a } from 'src/components/Logo/Logo.tsx'
 import { AdminHome as AdminHome_218e034a70ff3eab0fb4c18e5b33717a } from 'src/components/Logo/Logo.tsx'
 import { AdminLogo as AdminLogo_218e034a70ff3eab0fb4c18e5b33717a } from 'src/components/Logo/Logo.tsx'
-import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
-import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -75,7 +73,5 @@ export const importMap = {
   "@/Footer/RowLabel#RowLabel": RowLabel_1f6ff6ff633e3695d348f4f3c58f1466,
   "./components/Logo/Logo.tsx#AccountIcon": AccountIcon_218e034a70ff3eab0fb4c18e5b33717a,
   "./components/Logo/Logo.tsx#AdminHome": AdminHome_218e034a70ff3eab0fb4c18e5b33717a,
-  "./components/Logo/Logo.tsx#AdminLogo": AdminLogo_218e034a70ff3eab0fb4c18e5b33717a,
-  "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
-  "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e
+  "./components/Logo/Logo.tsx#AdminLogo": AdminLogo_218e034a70ff3eab0fb4c18e5b33717a
 }
