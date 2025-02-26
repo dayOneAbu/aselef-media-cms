@@ -1,22 +1,27 @@
-'use client'
-
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
 } from '@/components/ui/navigation-menu'
-import { Separator } from '@radix-ui/react-select'
 import Link from 'next/link'
 import { cn } from 'src/utilities/cn'
 
-interface DesktopNavProps {
-  items: Array<{
-    type: 'link' | 'separator'
-    link?: {
-      href: string
-      label: string
-    }
+interface NavItem {
+  type: 'link' | 'separator' | 'dropdown'
+  link?: {
+    href: string
+    label: string
+  }
+  children?: Array<{
+    href: string
+    label: string
   }>
+}
+
+interface DesktopNavProps {
+  items: NavItem[]
 }
 
 export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
@@ -32,7 +37,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
             )
           }
 
-          if (item.link) {
+          if (item.type === 'link' && item.link) {
             return (
               <NavigationMenuItem key={`link-${i}`}>
                 <Link
@@ -43,12 +48,32 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
                     'hover:text-foreground/80',
                     'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2',
                     'hover:bg-accent',
-                    'focus:bg-accent focus:outline-none',
                     'disabled:pointer-events-none disabled:opacity-50',
                   )}
                 >
                   {item.link.label}
                 </Link>
+              </NavigationMenuItem>
+            )
+          }
+
+          if (item.type === 'dropdown' && item.link && item.children) {
+            return (
+              <NavigationMenuItem key={`dropdown-${i}`} className="relative">
+                <NavigationMenuTrigger>{item.link.label}</NavigationMenuTrigger>
+                <NavigationMenuContent className="absolute z-50 mt-2 min-h-24 rounded-lg shadow-lg min-w-[400px]">
+                  <div className="p-2">
+                    {item.children.map((child, j) => (
+                      <Link
+                        key={`child-${j}`}
+                        href={child.href}
+                        className="text-foreground text-sm p-2 hover:bg-accent rounded-md"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
               </NavigationMenuItem>
             )
           }

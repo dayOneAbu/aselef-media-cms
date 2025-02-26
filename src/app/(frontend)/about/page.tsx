@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Card } from '@/components/ui/card'
 
 const timeline = [
   {
@@ -26,7 +27,32 @@ const timeline = [
       'Certified by the Ethiopian Broadcasting Authority and Addis Ababa City Government Culture & Tourism Bureau, ensuring compliance and quality in every project.',
   },
 ]
-
+const serviceData = [
+  {
+    title: 'Advertising Services',
+    services: ['Radio', 'Television', 'Online'],
+  },
+  {
+    title: 'Documentary & Feature Film Production',
+    services: ['Production', 'Coordination'],
+  },
+  {
+    title: 'Television & Radio Production',
+    services: ['Editing', 'Preparation'],
+  },
+  {
+    title: 'Digital Marketing Services',
+    services: [],
+  },
+  {
+    title: 'Digital Public Relations Services',
+    services: [],
+  },
+  {
+    title: 'Social Media Management Services',
+    services: ['Planning', 'Research', 'Coordination'],
+  },
+]
 export default function Example() {
   return (
     <div className="isolate mb-16 ">
@@ -34,15 +60,15 @@ export default function Example() {
       <div className="relative isolate -z-10 overflow-hidden bg-gradient-to-b from-indigo-100/20 pt-4">
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96"
+          className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg]  shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96"
         />
         <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
-            <h1 className="max-w-2xl text-4xl text-brand font-bold tracking-tight  sm:text-6xl lg:col-span-2 xl:col-auto">
+            <h1 className="max-w-2xl text-4xl font-bold tracking-tight  sm:text-6xl lg:col-span-2 xl:col-auto">
               We’re a passionate group of people working .....
             </h1>
             <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-              <p className="text-lg leading-8 text-brand ">
+              <p className="text-lg leading-8">
                 To empower communities, businesses, and institutions through strategic communication
                 that sparks change. We are committed to advancing social development, promoting
                 health initiatives, and equipping professionals with the tools to thrive in an
@@ -117,46 +143,6 @@ export default function Example() {
                 action and foster development.
               </p>
             </div>
-            {/* <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
-              <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
-                <Image
-                  alt=""
-                  src="/voice recording.webp"
-                  width={1152}
-                  height={842}
-                  className="aspect-[7/5] w-full max-w-none rounded-2xl object-cover"
-                />
-              </div>
-              <div className="contents lg:col-span-2 lg:col-end-2 lg:ml-auto lg:flex lg:w-[37rem] lg:items-start lg:justify-end lg:gap-x-8">
-                <div className="order-first flex w-64 flex-none justify-end self-end lg:w-auto">
-                  <Image
-                    alt=""
-                    width={768}
-                    height={604}
-                    src="/two-men-working.webp"
-                    className="aspect-[4/3] w-[24rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-                  />
-                </div>
-                <div className="flex w-96 flex-auto justify-end lg:w-auto lg:flex-none">
-                  <Image
-                    alt=""
-                    width={1152}
-                    height={842}
-                    src="/office-2-equip.webp"
-                    className="aspect-[7/5] w-[37rem] max-w-none flex-none rounded-2xl bg-gray-50 object-cover"
-                  />
-                </div>
-                <div className="hidden sm:block sm:w-0 sm:flex-auto lg:w-auto lg:flex-none">
-                  <Image
-                    alt=""
-                    width={768}
-                    height={604}
-                    src="/audio-recorder.webp"
-                    className="aspect-[4/3] w-[24rem] max-w-none rounded-2xl bg-gray-50 object-cover"
-                  />
-                </div>
-              </div>
-            </div> */}
             <div className="flex flex-wrap items-start justify-end gap-6 sm:gap-8 lg:contents">
               <div className="hidden md:flex w-full lg:w-auto lg:flex-none lg:self-end">
                 <Image
@@ -226,6 +212,40 @@ export default function Example() {
           </div>
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto w-full px-6 py-12 sm:py-16 lg:py-24">
+        <h2 className="text-4xl font-semibold text-center mb-8">Services We Provide</h2>
+        <div className="flex flex-col items-center space-y-8 lg:flex-row lg:space-x-8 lg:space-y-0 lg:justify-between">
+          {/* Image on the Left (50% width) */}
+          <div className="flex justify-center lg:w-1/2">
+            <Image
+              src="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
+              alt="Aselef Media and Communication Logo"
+              width={300}
+              height={300}
+              className="w-full h-full object-cover rounded-lg shadow-lg"
+            />
+          </div>
+
+          {/* Services Cards (50% width) */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 lg:w-1/2">
+            {serviceData.map((service) => (
+              <Card
+                key={service.title}
+                className="shadow-lg rounded-lg p-6 hover:shadow-xl transition-all duration-300"
+              >
+                <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
+                <ul className="list-disc pl-5 space-y-2 text-sm">
+                  {service.services.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
         <h2 className="text-3xl font-bold tracking-tight  sm:text-4xl">
           Ready to dive in?

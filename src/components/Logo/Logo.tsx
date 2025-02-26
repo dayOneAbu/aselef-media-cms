@@ -24,8 +24,8 @@ export const Logo = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-20 lg:h-32', className)}
-      src="/AMCRevised-logo with whitebg-Photoroom.png"
+      className={clsx('max-w-[12rem] w-full mb-2 h-20 lg:h-32', className)}
+      src="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
     />
   )
 }
@@ -44,7 +44,7 @@ export const LogoFooter = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-20 lg:h-32', className)}
+      className={clsx('max-w-[9.375rem] w-full h-32', className)}
       src="/ezgif.com-gif-maker.webp"
     />
   )

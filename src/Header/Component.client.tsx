@@ -2,7 +2,8 @@
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import type React from 'react'
+import { useEffect, useState } from 'react'
 
 import type { Header, Category, Page } from '@/payload-types'
 
@@ -11,35 +12,27 @@ import { DesktopNav } from './Nav/desktop-nav'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { Logo } from '@/components/Logo/Logo'
+import { buildNestedNavItems } from './helper'
 
 interface HeaderClientProps {
   categories: Category[]
   data: Header
 }
-
 export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
-  const pathname = usePathname()
 
   useEffect(() => {
     setHeaderTheme(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname])
+  }, [setHeaderTheme])
 
   useEffect(() => {
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerTheme])
+  }, [headerTheme, theme])
 
+  // Build nested navigation items
   const navItems = [
-    ...(categories || []).map((category) => ({
-      type: 'link' as const,
-      link: {
-        href: `/categories/${category.slug}`,
-        label: category.title,
-      },
-    })),
+    ...buildNestedNavItems(categories || []),
     { type: 'separator' as const },
     ...(data?.navItems || []).map((item) => ({
       type: 'link' as const,
@@ -54,26 +47,25 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
   ]
 
   return (
-    <header className="bg-brand py-4 lg:h-48 h-24">
+    <header className="bg-brand lg:h-48 h-28 relative">
       <div className="container mx-auto px-4 flex flex-col">
-        {/* Top bar */}
-        <div className="flex flex-row items-center justify-between py-4 h-24 lg:h-30">
+        <div className="flex flex-row items-center justify-between h-28 lg:h-30">
           <Link
             href="/"
-            className="text-2xl w -2/3 font-bold transition-colors flex-shrink-0 lg:text-center lg:w-auto"
+            className="text-2xl font-bold flex flex-col md:flex-row items-baseline transition-colors flex-shrink-0 lg:text-center lg:w-auto"
           >
             <Logo />
+            <h2 className="text-2xl ml-4 text-white font-semibold lg:font-bold transition-colors flex-shrink-0 lg:text-center lg:w-auto">
+              ትክክለኛነት በፍጥነት
+            </h2>
           </Link>
-
-          <div className="flex flex-row lg:mr-14">
+          <div className="flex flex-row lg:mr-14 items-center justify-center">
             <ThemeSelector />
-            <div className="lg:hidden py-2 w -1/3">
+            <div className="lg:hidden">
               <MobileNav items={navItems} />
             </div>
           </div>
         </div>
-
-        {/* Desktop Navigation - under the logo on desktop */}
         <div className="py-2 lg:h-auto flex mt-4 flex-col lg:flex-row justify-center lg:justify-between lg:gap-8">
           <DesktopNav items={navItems} />
         </div>

@@ -6,7 +6,7 @@ import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Badge } from '@/components/ui/badge'
 import { Clock } from 'lucide-react'
 import { cn } from '@/utilities/cn'
-import { FeaturedPost, FeaturedArticleSize } from './types'
+import type { FeaturedPost, FeaturedArticleSize } from './types'
 import Link from 'next/link'
 
 interface FeaturedArticleCardProps {
@@ -47,7 +47,7 @@ export function FeaturedArticleCard({ article, size }: FeaturedArticleCardProps)
     <Link href={`/posts/${article.slug}`} className="block h-full">
       <Card
         className={cn(
-          'group overflow-hidden rounded-xl h-full cursor-pointer border   bg-brand-dark transition-all hover:border-brand',
+          'group overflow-hidden rounded-xl h-full cursor-pointer border   bg-brand transition-all hover:border-brand',
           !showImage && 'bg-muted/30 hover:bg-muted/50 transition-colors',
         )}
       >

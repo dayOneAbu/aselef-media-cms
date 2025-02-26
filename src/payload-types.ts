@@ -1670,14 +1670,33 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
+ * via the `definition` "Advertisement".
  */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
+export interface Advertisement {
+  /**
+   * Choose whether to display text content or an image
+   */
+  contentType?: ('richText' | 'image') | null;
+  richTextContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | Media;
+  aspectRatio?: ('728/120' | '300/250' | '250/250' | '160/600' | '400/380' | '468/120') | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'code';
+  blockType: 'advertisement';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

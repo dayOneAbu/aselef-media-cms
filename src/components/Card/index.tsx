@@ -146,7 +146,7 @@ export const Card: React.FC<{
               isCompact ? 'text-xs sm:text-sm' : 'text-sm sm:text-base',
             )}
           >
-            Read More{' '}
+            ማንበብ ይቀጥሉ{' '}
             <ArrowRight
               className={cn('ml-1.5 sm:ml-2', isCompact ? 'h-3 w-3' : 'h-3.5 w-3.5 sm:h-4 sm:w-4')}
             />

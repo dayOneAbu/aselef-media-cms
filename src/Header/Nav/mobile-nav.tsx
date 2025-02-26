@@ -2,23 +2,30 @@
 
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Menu } from 'lucide-react'
+import { Menu, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import Link from 'next/link'
 
-interface MobileNavProps {
-  items: Array<{
-    type: 'link' | 'separator'
-    link?: {
-      href: string
-      label: string
-    }
+interface NavItem {
+  type: 'link' | 'separator' | 'dropdown'
+  link?: {
+    href: string
+    label: string
+  }
+  children?: Array<{
+    href: string
+    label: string
   }>
+}
+
+interface MobileNavProps {
+  items: NavItem[]
 }
 
 export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
@@ -40,7 +47,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
                   return <div key={`sep-${i}`} className="h-px bg-border" />
                 }
 
-                if (item.link) {
+                if (item.type === 'link' && item.link) {
                   return (
                     <NavigationMenuItem key={`link-${i}`}>
                       <Link
@@ -50,6 +57,32 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
                         {item.link.label}
                       </Link>
                     </NavigationMenuItem>
+                  )
+                }
+
+                if (item.type === 'dropdown' && item.link && item.children) {
+                  return (
+                    <Collapsible key={`dropdown-${i}`}>
+                      <CollapsibleTrigger className="flex items-center bg-transparent justify-between w-full p-2 hover:bg-accent rounded-md">
+                        <span className="text-foreground text-sm sm:text-base">
+                          {item.link.label}
+                        </span>
+                        <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="pl-4 space-y-2 py-2">
+                          {item.children.map((child, j) => (
+                            <Link
+                              key={`child-${j}`}
+                              href={child.href}
+                              className="text-foreground text-sm block p-2 hover:bg-accent rounded-md"
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
                   )
                 }
               })}

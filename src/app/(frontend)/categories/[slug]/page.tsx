@@ -26,9 +26,9 @@ export default async function CategoryPage({ params }) {
     <div className="container mx-auto p-4 space-y-8">
       <PayloadRedirects disableNotFound url={url} />
       <HeroImageGrid
-        title="Discover Category Name Goes Here 24/7"
+        title={`Discover ${slug} news 24/7`}
         description="Find unique moments and news."
-        image="/ezgif.com-gif-maker (1).webp"
+        image="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
         layout="textLeft"
       />
 

@@ -13,7 +13,7 @@ export function AdvertisementBanner({ className }: AdvertisementBannerProps) {
         <div className="bg-muted/30 rounded-lg p-6 text-center">
           <p className="text-xs text-muted-foreground mb-2">Advertisement</p>
           <div className="aspect-[728/90] bg-muted/20 rounded flex items-center justify-center">
-            <p className="text-muted-foreground">Ad Space Available</p>
+            <p className="text-muted-foreground">we have Ad Spaces Available, contact us</p>
           </div>
         </div>
       </CardContent>

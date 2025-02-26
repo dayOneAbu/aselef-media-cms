@@ -34,7 +34,7 @@ export function HeroImageGrid({ title, description, layout, image }: HeroSection
           'md:right-0': layout === 'textLeft',
         })}
       >
-        <Image src={image} alt={title} fill className="object-cover" priority />
+        <Image src={image} alt={title} fill className="object-contain" priority />
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
-import { slugField } from '../fields/slug'
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
+import { slugField } from '@/fields/slug'
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
@@ -21,5 +21,14 @@ export const Categories: CollectionConfig = {
       required: true,
     },
     ...slugField(),
+    {
+      name: 'parent',
+      type: 'relationship',
+      relationTo: 'categories',
+      // Prevents a category from being its own parent
+      filterOptions: ({ id }) => ({
+        id: { not_equals: id },
+      }),
+    },
   ],
 }

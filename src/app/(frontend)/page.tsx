@@ -8,6 +8,7 @@ import type { Category, FeaturedPost } from '@/components/featured-news/types'
 import { PageRange } from '@/components/PageRange'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
+import { AdvertisementBanner } from '@/components/ad-Banner'
 export const dynamic = 'force-static'
 
 export const revalidate = 300
@@ -16,15 +17,18 @@ export default async function Home() {
   const posts = await queryPosts()
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto py-8">
       <section className="w-full">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-semibold">Featured News</h2>
+        </div>
         <FeaturedGrid articles={FeaturedArticles} />
       </section>
       <div className="grid grid-cols-12 gap-8 mt-8">
         {/* Main Content */}
         <div className="col-span-12 lg:col-span-8">
           <div className="space-y-8">
-            {/* <AdvertisementBanner /> */}
+            <AdvertisementBanner />
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-semibold">Latest News</h2>
@@ -51,10 +55,7 @@ export default async function Home() {
 
         {/* Sidebar */}
         <aside className="col-span-12 lg:col-span-4 space-y-8">
-          <div className="space-y-8">
-            {/* <AdvertisementBanner />
-            <TrendingHeadlines /> */}
-          </div>
+          <div className="space-y-8">{/* <AdvertisementBanner /> */}</div>
         </aside>
       </div>
     </div>
