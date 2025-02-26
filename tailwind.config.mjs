@@ -7,7 +7,11 @@ export default {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
   prefix: '',
   safelist: [
     'lg:col-span-4',
@@ -94,16 +98,16 @@ export default {
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
         brand: {
-          white: '##f1f5f9',
-          dark: '##2244f7', // Dark Navy
+          white: '#f1f5f9',
+          dark: '#2d74aa', // Dark Navy
           DEFAULT: '#0f172a', // Rich Blue
           light: '#55d2fb', // Light Blue
         },
       },
       backgroundColor: {
         brand: {
-          white: '##f1f5f9',
-          dark: '##2244f7',
+          white: '#f1f5f9',
+          dark: '#2d74aa',
           DEFAULT: '#0f172a',
           light: '#55d2fb',
           'light/10': 'rgba(173, 235, 255, 0.1)',
@@ -112,24 +116,24 @@ export default {
       },
       borderColor: {
         brand: {
-          white: '##f1f5f9',
-          dark: '##0f172a',
+          white: '#f1f5f9',
+          dark: '#0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },
       },
       ringColor: {
         brand: {
-          white: '##f1f5f9',
-          dark: '##0f172a',
+          white: '#f1f5f9',
+          dark: '#0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },
       },
       textColor: {
         brand: {
-          white: '##f1f5f9',
-          dark: '##0f172a',
+          white: '#f1f5f9',
+          dark: '#0f172a',
           DEFAULT: '#003459',
           light: '#ADEBFF',
         },
