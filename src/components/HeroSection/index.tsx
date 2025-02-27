@@ -10,7 +10,7 @@ interface HeroSectionProps {
 
 export function HeroImageGrid({ title, description, layout, image }: HeroSectionProps) {
   return (
-    <div className="relative min-h-[400px] md:min-h-[600px] flex flex-col md:flex-row">
+    <div className="relative z-0 min-h-[400px] md:min-h-[600px] flex flex-col md:flex-row">
       {/* Text Section */}
       <div
         className={cn(
@@ -29,10 +29,13 @@ export function HeroImageGrid({ title, description, layout, image }: HeroSection
 
       {/* Image Section */}
       <div
-        className={cn('w-full h-[300px] md:h-full md:w-2/3 relative order-1 md:absolute md:top-0', {
-          'md:left-0': layout === 'textRight',
-          'md:right-0': layout === 'textLeft',
-        })}
+        className={cn(
+          'w-full hidden md:block h-[300px] md:h-full md:w-2/3 relative order-1 md:absolute md:top-0',
+          {
+            'md:left-0': layout === 'textRight',
+            'md:right-0': layout === 'textLeft',
+          },
+        )}
       >
         <Image src={image} alt={title} fill className="object-contain" priority />
       </div>

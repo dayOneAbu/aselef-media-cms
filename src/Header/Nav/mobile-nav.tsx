@@ -12,22 +12,14 @@ import {
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import Link from 'next/link'
 
-interface NavItem {
-  type: 'link' | 'separator' | 'dropdown'
-  link?: {
-    href: string
-    label: string
-  }
-  children?: Array<{
-    href: string
-    label: string
-  }>
-}
-
 interface MobileNavProps {
   items: NavItem[]
 }
-
+interface NavItem {
+  type: 'link' | 'separator' | 'dropdown'
+  link?: { href: string; label: string }
+  children?: Array<NavItem>
+}
 export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
   return (
     <Sheet>
@@ -71,20 +63,70 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <div className="pl-4 space-y-2 py-2">
-                          {item.children.map((child, j) => (
-                            <Link
-                              key={`child-${j}`}
-                              href={child.href}
-                              className="text-foreground text-sm block p-2 hover:bg-accent rounded-md"
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                          {item.children.map((child, j) =>
+                            child.type === 'link' ? (
+                              <Link
+                                key={`child-${j}`}
+                                href={child.link!.href}
+                                className="text-foreground text-sm block p-2 hover:bg-accent rounded-md"
+                              >
+                                {child.link!.label}
+                              </Link>
+                            ) : (
+                              <Collapsible key={`child-${j}`}>
+                                <CollapsibleTrigger className="flex items-center bg-transparent justify-between w-full p-2 hover:bg-accent rounded-md">
+                                  <span className="text-foreground text-sm">
+                                    {child.link!.label}
+                                  </span>
+                                  <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                  <div className="pl-4 space-y-2 py-2">
+                                    {child.children?.map((grandchild, k) =>
+                                      grandchild.type === 'link' ? (
+                                        <Link
+                                          key={`grandchild-${k}`}
+                                          href={grandchild.link!.href}
+                                          className="text-foreground text-sm block p-2 hover:bg-accent rounded-md"
+                                        >
+                                          {grandchild.link!.label}
+                                        </Link>
+                                      ) : (
+                                        <Collapsible key={`grandchild-${k}`}>
+                                          <CollapsibleTrigger className="flex items-center bg-transparent justify-between w-full p-2 hover:bg-accent rounded-md">
+                                            <span className="text-foreground text-sm">
+                                              {grandchild.link!.label}
+                                            </span>
+                                            <ChevronRight className="h-4 w-4 transition-transform data-[state=open]:rotate-90" />
+                                          </CollapsibleTrigger>
+                                          <CollapsibleContent>
+                                            <div className="pl-4 space-y-2 py-2">
+                                              {grandchild.children?.map((greatGrandchild, m) => (
+                                                <Link
+                                                  key={`great-grandchild-${m}`}
+                                                  href={greatGrandchild.link!.href}
+                                                  className="text-foreground text-sm block p-2 hover:bg-accent rounded-md"
+                                                >
+                                                  {greatGrandchild.link!.label}
+                                                </Link>
+                                              ))}
+                                            </div>
+                                          </CollapsibleContent>
+                                        </Collapsible>
+                                      ),
+                                    )}
+                                  </div>
+                                </CollapsibleContent>
+                              </Collapsible>
+                            ),
+                          )}
                         </div>
                       </CollapsibleContent>
                     </Collapsible>
                   )
                 }
+
+                return null
               })}
             </NavigationMenuList>
           </NavigationMenu>

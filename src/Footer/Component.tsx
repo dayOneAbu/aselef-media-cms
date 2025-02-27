@@ -38,7 +38,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
           </div>
           <div>
             <h4 className="font-semibold my-2 py-4">Categories</h4>
-            <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
+            <nav className="space-y-2 text-sm grid grid-cols-2 md:flex-col gap-4">
               {categories.map((cat) => (
                 <Link key={cat.id} href={cat.title}>
                   {cat.title}

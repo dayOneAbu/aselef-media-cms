@@ -9,15 +9,22 @@ import type { Header, Category, Page } from '@/payload-types'
 
 import { MobileNav } from './Nav/mobile-nav'
 import { DesktopNav } from './Nav/desktop-nav'
-
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { Logo } from '@/components/Logo/Logo'
 import { buildNestedNavItems } from './helper'
+
+// Explicitly define NavItem interface here or import it if defined elsewhere
+interface NavItem {
+  type: 'link' | 'separator' | 'dropdown'
+  link?: { href: string; label: string }
+  children?: Array<NavItem>
+}
 
 interface HeaderClientProps {
   categories: Category[]
   data: Header
 }
+
 export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
@@ -30,12 +37,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
     if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
   }, [headerTheme, theme])
 
-  // Build nested navigation items
-  const navItems = [
+  // Build nested navigation items with explicit typing
+  const navItems: NavItem[] = [
     ...buildNestedNavItems(categories || []),
-    { type: 'separator' as const },
+    { type: 'separator' } as const, // 'as const' ensures literal type
     ...(data?.navItems || []).map((item) => ({
-      type: 'link' as const,
+      type: 'link' as const, // 'as const' ensures literal type
       link: {
         href:
           item.link?.type === 'reference'
@@ -47,7 +54,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
   ]
 
   return (
-    <header className="bg-brand lg:h-48 h-28 relative">
+    <header className="bg-brand lg:h-48 h-28 relative z-10">
       <div className="container mx-auto px-4 flex flex-col">
         <div className="flex flex-row items-center justify-between h-28 lg:h-30">
           <Link

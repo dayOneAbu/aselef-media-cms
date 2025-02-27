@@ -25,7 +25,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx('max-w-[12rem] w-full mb-2 h-20 lg:h-32', className)}
-      src="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
+      src="/aselef-new-logo.png"
     />
   )
 }

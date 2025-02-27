@@ -22,9 +22,10 @@ const queryCategories = cache(async () => {
   const result = await payload.find({
     collection: 'categories',
     draft,
-    depth: 1,
+    depth: 2,
     overrideAccess: draft,
-    sort: 'title',
+    sort: 'Created At',
+    limit: 20,
   })
 
   return result.docs || null

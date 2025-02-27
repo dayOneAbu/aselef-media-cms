@@ -219,7 +219,7 @@ export default function Example() {
           {/* Image on the Left (50% width) */}
           <div className="flex justify-center lg:w-1/2">
             <Image
-              src="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
+              src="/aselef-new-logo.png"
               alt="Aselef Media and Communication Logo"
               width={300}
               height={300}

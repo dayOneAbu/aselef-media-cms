@@ -10,33 +10,35 @@ import type { Post } from '@/payload-types'
 
 import { HeroImageGrid } from '@/components/HeroSection'
 import { Pagination } from '@/components/Pagination'
+import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 300
 
 export default async function CategoryPage({ params }) {
   const { slug } = await params
-
   const url = `/categories/${slug}`
   const posts = await queryPostsByCategory({ slug })
 
   if (!posts) return <PayloadRedirects url={url} />
 
   return (
-    <div className="container mx-auto p-4 space-y-8">
-      <PayloadRedirects disableNotFound url={url} />
-      <HeroImageGrid
-        title={`Discover ${slug} news 24/7`}
-        description="Find unique moments and news."
-        image="/Finalሪቫይዝድ አሰለፍ ሎጎ ድራፍት-Photoroom.png"
-        layout="textLeft"
-      />
-
-      <PostGrid title="Latest Stories" posts={posts.docs as Post[]} />
-      <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
+    <div className="container mx-auto py-8 overflow-visible">
+      <PageClient />
+      <div className="space-y-8">
+        <PayloadRedirects disableNotFound url={url} />
+        <HeroImageGrid
+          title={`Discover ${decodeURIComponent(slug)} news 24/7`}
+          description="Find unique moments and news."
+          image="/aselef-new-logo.png"
+          layout="textLeft"
+        />
+        <PostGrid title="Latest Stories" posts={posts.docs as Post[]} />
+        <div className="container">
+          {posts.totalPages > 1 && posts.page && (
+            <Pagination page={posts.page} totalPages={posts.totalPages} />
+          )}
+        </div>
       </div>
     </div>
   )
