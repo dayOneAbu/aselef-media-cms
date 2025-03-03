@@ -54,7 +54,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
   ]
 
   return (
-    <header className="bg-brand lg:h-48 h-28 relative z-10">
+    <header className="bg-brand-dark py-1 lg:py-3 lg:h-48 h-28 relative z-10">
       <div className="container mx-auto px-4 flex flex-col">
         <div className="flex flex-row items-center justify-between h-28 lg:h-30">
           <Link

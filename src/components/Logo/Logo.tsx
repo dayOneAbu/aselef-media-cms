@@ -24,7 +24,10 @@ export const Logo = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[12rem] w-full mb-2 h-20 lg:h-32', className)}
+      className={clsx(
+        'max-w-[12rem] bg-brand-white rounded overflow-hidden w-full mb-2 h-16 lg:h-28',
+        className,
+      )}
       src="/aselef-new-logo.png"
     />
   )
