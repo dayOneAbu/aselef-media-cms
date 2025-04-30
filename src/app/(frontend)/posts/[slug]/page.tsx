@@ -102,6 +102,8 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
     where: {
       slug: { equals: slug },
     },
+    context: { isSinglePost: true }, // Explicitly mark as single post fetch
+    // cacheBust: true, // Bypass Payload cache
   })
   return result.docs?.[0] || null
 })

@@ -59,11 +59,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ categories, data }) 
         <div className="flex flex-row items-center justify-between h-28 lg:h-30">
           <Link
             href="/"
-            className="text-2xl font-bold flex flex-col md:flex-row items-baseline transition-colors flex-shrink-0 lg:text-center lg:w-auto"
+            className="text-2xl font-bold flex flex-col md:flex-row items-end transition-colors flex-shrink-0 lg:text-center lg:w-auto"
           >
             <Logo />
             <h2 className="text-2xl ml-4 text-white font-semibold lg:font-bold transition-colors flex-shrink-0 lg:text-center lg:w-auto">
-              ትክክለኛነት በፍጥነት
+              ትክክለኛነት፤በፍጥነት
             </h2>
           </Link>
           <div className="flex flex-row lg:mr-14 items-center justify-center">

@@ -34,6 +34,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items }) => {
         <ScrollArea className="h-[calc(100vh-4rem)] px-4">
           <NavigationMenu className="w-full">
             <NavigationMenuList className="flex flex-col space-y-4 py-4">
+              <NavigationMenuItem>
+                <Link
+                  href={'/'}
+                  className="text-foreground text-sm sm:text-base transition-colors block p-2 hover:bg-accent rounded-md"
+                >
+                  መነሻ ገጽ
+                </Link>
+              </NavigationMenuItem>
               {items.map((item, i) => {
                 if (item.type === 'separator') {
                   return <div key={`sep-${i}`} className="h-px bg-border" />

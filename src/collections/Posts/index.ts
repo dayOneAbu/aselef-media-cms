@@ -1,5 +1,4 @@
 import type { CollectionConfig } from 'payload'
-
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -8,7 +7,6 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
@@ -16,7 +14,6 @@ import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
-
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -27,7 +24,6 @@ import {
 import { slugField } from '@/fields/slug'
 import { toggleFeatureHook } from './hooks/toggleFeature'
 import AdBlock from '@/blocks/AdBlock/config'
-
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
@@ -36,9 +32,6 @@ export const Posts: CollectionConfig<'posts'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a post is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -57,7 +50,6 @@ export const Posts: CollectionConfig<'posts'> = {
           collection: 'posts',
           req,
         })
-
         return path
       },
     },
@@ -103,13 +95,6 @@ export const Posts: CollectionConfig<'posts'> = {
         description: 'Number of visitors who have read this post',
         readOnly: true,
       },
-      // hooks: {
-      //   afterRead: [
-      //     ({ data }) => {
-      //       return (data?.visitorsRead ?? 0) + 1
-      //     },
-      //   ],
-      // },
     },
     {
       type: 'tabs',
@@ -187,13 +172,9 @@ export const Posts: CollectionConfig<'posts'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -230,9 +211,6 @@ export const Posts: CollectionConfig<'posts'> = {
       hasMany: true,
       relationTo: 'users',
     },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
     {
       name: 'populatedAuthors',
       type: 'array',
@@ -258,14 +236,61 @@ export const Posts: CollectionConfig<'posts'> = {
   ],
   hooks: {
     afterChange: [revalidatePost],
-    afterRead: [populateAuthors],
+
+    afterRead: [
+      populateAuthors,
+      async ({ doc, req }) => {
+        // console.log(
+        //   '➡️ AfterRead hook triggered for post:',
+        //   doc.id,
+        //   'Slug:',
+        //   doc.slug,
+        //   'API:',
+        //   req?.payloadAPI,
+        // )
+        if (
+          req?.payloadAPI === 'REST' ||
+          req?.payloadAPI === 'GraphQL' ||
+          req?.payloadAPI === 'local'
+        ) {
+          // console.log('✅ Valid API request detected')
+          try {
+            // Only increment for direct post visits
+            const isSinglePostFetch = req.query?.slug || req.context?.isSinglePost
+            if (!req.context?.updatingVisitorsRead && isSinglePostFetch) {
+              // console.log('⚡ Incrementing visitorsRead for post:', doc.id)
+              const result = await req.payload.update({
+                collection: 'posts',
+                id: doc.id,
+                overrideAccess: true,
+                context: {
+                  updatingVisitorsRead: true,
+                  disableRevalidate: true,
+                },
+                data: {
+                  visitorsRead: (doc.visitorsRead || 0) + 1,
+                },
+              })
+              // console.log('🔢 Update result:', result.visitorsRead)
+              return result
+            }
+            // console.log('🚫 Update skipped: List fetch or context flag')
+          } catch (err) {
+            // console.error('❌ Error updating visitorsRead:', err)
+          }
+        } else {
+          // console.log('🛑 Request not from API - Payload API:', req?.payloadAPI)
+        }
+        return doc
+      },
+    ],
     afterDelete: [revalidateDelete],
     beforeChange: [toggleFeatureHook],
   },
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 100,
       },
     },
     maxPerDoc: 50,

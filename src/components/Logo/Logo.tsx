@@ -25,7 +25,7 @@ export const Logo = (props: Props) => {
       fetchPriority={priority}
       decoding="async"
       className={clsx(
-        'max-w-[12rem] bg-brand-white rounded overflow-hidden w-full mb-2 h-16 lg:h-28',
+        'max-w-[12rem] md:max-w-[24rem] self-baseline bg-brand-white rounded overflow-hidden w-full p-0 m-0 h-16 lg:h-28',
         className,
       )}
       src="/aselef-new-logo.png"

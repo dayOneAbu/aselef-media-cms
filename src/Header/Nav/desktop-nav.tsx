@@ -23,6 +23,22 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ items }) => {
   return (
     <NavigationMenu className="hidden lg:block w-full">
       <NavigationMenuList className="flex items-center gap-2">
+        <NavigationMenuItem>
+          <Link
+            href={'/'}
+            className={cn(
+              'text-brand-white transition-colors flex-shrink-0',
+              'text-base lg:text-lg',
+              'hover:text-foreground/80',
+              'group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2',
+              'hover:bg-accent',
+              'disabled:pointer-events-none disabled:opacity-50',
+            )}
+          >
+            መነሻ ገጽ
+          </Link>
+        </NavigationMenuItem>
+
         {items.map((item, i) => {
           if (item.type === 'separator') {
             return (

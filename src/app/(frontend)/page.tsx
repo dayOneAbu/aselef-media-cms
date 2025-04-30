@@ -1,6 +1,5 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-
 import type { Metadata } from 'next'
 import { cache } from 'react'
 import { FeaturedGrid } from '@/components/featured-news/featured-grid'
@@ -9,9 +8,12 @@ import { PageRange } from '@/components/PageRange'
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { Pagination } from '@/components/Pagination'
 import { AdvertisementBanner } from '@/components/ad-Banner'
-export const dynamic = 'force-static'
+import CategoryPage from '@/components/shared/category'
+import { TopVisitedPosts } from '@/components/shared/TopVisitedPosts'
 
+export const dynamic = 'force-static'
 export const revalidate = 300
+
 export default async function Home() {
   const FeaturedArticles = await queryFeaturedPosts()
   const posts = await queryPosts()
@@ -20,7 +22,7 @@ export default async function Home() {
     <div className="container mx-auto py-8">
       <section className="w-full">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold">Featured News</h2>
+          <h2 className="text-2xl font-semibold">የዕለቱ አበይት ዜናዎች</h2>
         </div>
         <FeaturedGrid articles={FeaturedArticles} />
       </section>
@@ -31,7 +33,7 @@ export default async function Home() {
             <AdvertisementBanner />
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-semibold">Latest News</h2>
+                <h2 className="text-2xl font-semibold">ዜናዎች</h2>
               </div>
               <div className="container mb-8">
                 <PageRange
@@ -41,9 +43,8 @@ export default async function Home() {
                   totalDocs={posts.totalDocs}
                 />
               </div>
-
               <CollectionArchive posts={posts.docs} />
-
+              <CategoryPage />
               <div className="container">
                 {posts.totalPages > 1 && posts.page && (
                   <Pagination page={posts.page} totalPages={posts.totalPages} />
@@ -52,10 +53,12 @@ export default async function Home() {
             </div>
           </div>
         </div>
-
         {/* Sidebar */}
         <aside className="col-span-12 lg:col-span-4 space-y-8">
-          <div className="space-y-8">{/* <AdvertisementBanner /> */}</div>
+          <div className="space-y-8">
+            <AdvertisementBanner />
+            <TopVisitedPosts /> {/* Add new component */}
+          </div>
         </aside>
       </div>
     </div>
@@ -67,9 +70,9 @@ export function generateMetadata(): Metadata {
     title: 'Aselef Media and Communication Home',
   }
 }
+
 const queryPosts = async () => {
   const payload = await getPayload({ config: configPromise })
-
   const posts = await payload.find({
     collection: 'posts',
     depth: 1,
@@ -81,6 +84,7 @@ const queryPosts = async () => {
       },
     },
     sort: '-createdAt',
+    context: { isListFetch: true }, // Indicate list fetch
     select: {
       id: true,
       title: true,
@@ -95,9 +99,9 @@ const queryPosts = async () => {
   })
   return posts
 }
+
 const queryFeaturedPosts = cache(async () => {
   const payload = await getPayload({ config: configPromise })
-
   const result = await payload.find({
     collection: 'posts',
     depth: 2,
@@ -108,6 +112,7 @@ const queryFeaturedPosts = cache(async () => {
         equals: true,
       },
     },
+    context: { isListFetch: true }, // Indicate list fetch
     select: {
       id: true,
       title: true,

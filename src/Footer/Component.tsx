@@ -29,7 +29,7 @@ export async function Footer({ categories }: { categories: Category[] }) {
           </div>
 
           <div className="mt-4">
-            <h4 className="font-semibold my-2 py-4">Company</h4>
+            <h4 className="font-semibold my-2 py-4">ስለ እኛ</h4>
             <nav className="space-y-2  text-sm flex flex-col md:flex-col gap-4">
               {navItems.map(({ link }, i) => {
                 return <CMSLink className=" " key={i} {...link} />
@@ -37,17 +37,20 @@ export async function Footer({ categories }: { categories: Category[] }) {
             </nav>
           </div>
           <div>
-            <h4 className="font-semibold my-2 py-4">Categories</h4>
+            <h4 className="font-semibold my-2 py-4">ምድቦች</h4>
             <nav className="space-y-2 text-sm grid grid-cols-2 md:flex-col gap-4">
-              {categories.map((cat) => (
-                <Link key={cat.id} href={cat.title}>
-                  {cat.title}
-                </Link>
-              ))}
+              <Link href={'/'}>መነሻ ገጽ</Link>
+              {categories
+                .filter((cat) => !cat.parent) // This filters out categories that have a parent
+                .map((cat) => (
+                  <Link key={cat.id} href={cat.title}>
+                    {cat.title}
+                  </Link>
+                ))}
             </nav>
           </div>
           <div>
-            <h4 className="font-semibold my-2 py-4">Social Links</h4>
+            <h4 className="font-semibold my-2 py-4">ማህበራዊ ትስስር ገጾች</h4>
             <nav className="space-y-2 text-sm flex flex-col md:flex-col gap-4">
               {socialNavItems.map(({ label, url }, i) => {
                 return (
