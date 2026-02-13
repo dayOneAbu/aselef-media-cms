@@ -162,8 +162,8 @@ export default buildConfig({
         // ... Other S3 configuration
       },
       acl: 'private',
-      enabled: true,
-      disableLocalStorage: true,
+      enabled: !!process.env.S3_ENDPOINT,
+      disableLocalStorage: !!process.env.S3_ENDPOINT,
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,

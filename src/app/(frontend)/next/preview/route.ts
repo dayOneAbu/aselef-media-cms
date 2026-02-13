@@ -1,4 +1,5 @@
 import { draftMode } from 'next/headers'
+import { NextRequest } from 'next/server'
 import { redirect } from 'next/navigation'
 import { getPayload, type PayloadRequest } from 'payload'
 import configPromise from '@payload-config'
@@ -6,15 +7,7 @@ import { CollectionSlug } from 'payload'
 
 // const payloadToken = 'payload-token'
 
-export async function GET(
-  req: Request & {
-    cookies: {
-      get: (name: string) => {
-        value: string
-      }
-    }
-  },
-): Promise<Response> {
+export async function GET(req: NextRequest): Promise<Response> {
   const payload = await getPayload({ config: configPromise })
   // const token = req.cookies.get(payloadToken)?.value
   const { searchParams } = new URL(req.url)
