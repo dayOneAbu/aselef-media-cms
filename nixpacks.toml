@@ -1,4 +1,4 @@
 [phases.build]
-# Run database synchronization/migrations before building the Next.js app
-# This prevents build errors when generateStaticParams tries to query non-existent tables
+# Run database synchronization before building the Next.js app
+# payload migrate is used since we've now generated migration files
 cmds = ["pnpm payload migrate", "pnpm run build"]

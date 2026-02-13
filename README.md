@@ -54,11 +54,24 @@ cp .env.example .env
 
 3. Configure environment variables (see below).
 
-4. Start the dev server:
+4. **Local Database Setup**:
+   Ensure you have a local PostgreSQL instance running. Create a database named `amc`:
 
-```bash
-pnpm dev
-```
+   ```bash
+   psql -U postgres -c "CREATE DATABASE amc;"
+   ```
+
+5. **Run Migrations**:
+   The project uses migrations to sync the database schema. Run them before starting:
+
+   ```bash
+   pnpm payload migrate
+   ```
+
+6. **Start the dev server**:
+   ```bash
+   pnpm dev
+   ```
 
 The site will be available at:
 
@@ -101,8 +114,19 @@ Notes:
 - **Posts** support rich text, hero image, SEO fields, categories, related posts, and authors.
 - **Media** supports image resizing and focal point.
 
-## Deployment notes
+## Deployment (Coolify/VPS)
 
-- Configure production environment variables for DB and (if used) S3.
-- If deploying on Vercel, `VERCEL_PROJECT_PRODUCTION_URL` is used to construct the public base URL.
-- Ensure your database is reachable from the deployment environment.
+This project is configured to deploy on Coolify using **Nixpacks**.
+
+1. **Environment Variables**:
+   Set `DATABASE_URI`, `PAYLOAD_SECRET`, and `NEXT_PUBLIC_SERVER_URL` in your Coolify application settings.
+2. **Database Sync**:
+   The `nixpacks.toml` file automatically runs `pnpm payload migrate` before building the app. **Always commit your migration files** in `src/migrations` to ensure the VPS database stays in sync.
+3. **Troubleshooting**:
+   If the build fails with "relation does not exist", it usually means migrations haven't run or the `DATABASE_URI` is incorrect.
+
+## Migrations
+
+- **Create a migration**: `pnpm payload migrate:create <name>`
+- **Run migrations**: `pnpm payload migrate`
+- **Check status**: `pnpm payload migrate:status`
