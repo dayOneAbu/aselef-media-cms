@@ -42,7 +42,7 @@ export const queryTopVisitedPosts = cache(async () => {
     const result = await payload.find({
       collection: 'posts',
       depth: 0, // Reduce depth to avoid image processing
-      limit: 10,
+      limit: 8,
       overrideAccess: false,
       where: {
         _status: { equals: 'published' },

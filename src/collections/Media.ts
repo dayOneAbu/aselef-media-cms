@@ -8,8 +8,9 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { canCreateMedia, isUploaderOrAdminOrEditor } from '../access/media'
+import { isAdminOrEditor } from '../access/posts'
 import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,12 +18,26 @@ const dirname = path.dirname(filename)
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: canCreateMedia,
+    delete: isUploaderOrAdminOrEditor,
     read: anyone,
-    update: authenticated,
+    update: isAdminOrEditor,
   },
   fields: [
+    {
+      name: 'uploadedBy',
+      type: 'relationship',
+      relationTo: 'users',
+      // required: true, // Optional for existing media
+      defaultValue: ({ req }) => req.user?.id,
+      access: {
+        update: () => false,
+      },
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
     {
       name: 'alt',
       type: 'text',

@@ -24,7 +24,7 @@ const queryCategories = cache(async () => {
     draft,
     depth: 2,
     overrideAccess: draft,
-    sort: 'Created At',
+    sort: 'createdAt',
     limit: 20,
   })
 

@@ -23,14 +23,23 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
 import { toggleFeatureHook } from './hooks/toggleFeature'
+import { populateTimeToRead } from './hooks/populateTimeToRead'
 import AdBlock from '@/blocks/AdBlock/config'
+import {
+  isAdminOrEditor,
+  isAdminOrEditorOrAuthor,
+  isAuthor,
+  isAuthorOrPublished,
+} from '../../access/posts'
+import { checkRole } from '../../access/roles'
+
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
   access: {
-    create: authenticated,
-    delete: authenticated,
-    read: authenticatedOrPublished,
-    update: authenticated,
+    create: isAdminOrEditorOrAuthor,
+    delete: isAdminOrEditor, // Only admins/editors can delete - authors can only delete their own if we change this
+    read: isAuthorOrPublished,
+    update: isAuthor, // Checks if user is admin/editor OR is in authors list
   },
   defaultPopulate: {
     title: true,
@@ -71,6 +80,9 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'isFeatured',
       type: 'checkbox',
       defaultValue: false,
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin', 'editor'], user),
+      },
       admin: {
         position: 'sidebar',
         description: 'Show this post in the featured section',
@@ -80,16 +92,19 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'timeToRead',
       type: 'number',
       min: 1,
-      defaultValue: 3,
       admin: {
         position: 'sidebar',
-        description: 'Estimated time to read in minutes',
+        description: 'Estimated time to read in minutes (auto-calculated)',
+        readOnly: true,
       },
     },
     {
       name: 'visitorsRead',
       type: 'number',
       defaultValue: 0,
+      access: {
+        update: () => false,
+      },
       admin: {
         position: 'sidebar',
         description: 'Number of visitors who have read this post',
@@ -210,6 +225,10 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       hasMany: true,
       relationTo: 'users',
+      defaultValue: ({ req }: { req: any }) => (req.user ? [req.user.id] : []),
+      access: {
+        update: ({ req: { user } }) => checkRole(['admin', 'editor'], user),
+      },
     },
     {
       name: 'populatedAuthors',
@@ -240,25 +259,19 @@ export const Posts: CollectionConfig<'posts'> = {
     afterRead: [
       populateAuthors,
       async ({ doc, req }) => {
-        // console.log(
-        //   '➡️ AfterRead hook triggered for post:',
-        //   doc.id,
-        //   'Slug:',
-        //   doc.slug,
-        //   'API:',
-        //   req?.payloadAPI,
-        // )
         if (
           req?.payloadAPI === 'REST' ||
           req?.payloadAPI === 'GraphQL' ||
           req?.payloadAPI === 'local'
         ) {
-          // console.log('✅ Valid API request detected')
           try {
-            // Only increment for direct post visits
+            // Only increment for direct post visits, avoiding list fetches (like TopVisitedPosts sidebars)
             const isSinglePostFetch = req.query?.slug || req.context?.isSinglePost
-            if (!req.context?.updatingVisitorsRead && isSinglePostFetch) {
-              // console.log('⚡ Incrementing visitorsRead for post:', doc.id)
+            if (
+              !req.context?.updatingVisitorsRead &&
+              !req.context?.isListFetch &&
+              isSinglePostFetch
+            ) {
               const result = await req.payload.update({
                 collection: 'posts',
                 id: doc.id,
@@ -271,21 +284,17 @@ export const Posts: CollectionConfig<'posts'> = {
                   visitorsRead: (doc.visitorsRead || 0) + 1,
                 },
               })
-              // console.log('🔢 Update result:', result.visitorsRead)
+
               return result
             }
-            // console.log('🚫 Update skipped: List fetch or context flag')
-          } catch (err) {
-            // console.error('❌ Error updating visitorsRead:', err)
-          }
+          } catch (err) {}
         } else {
-          // console.log('🛑 Request not from API - Payload API:', req?.payloadAPI)
         }
         return doc
       },
     ],
     afterDelete: [revalidateDelete],
-    beforeChange: [toggleFeatureHook],
+    beforeChange: [populateTimeToRead, toggleFeatureHook],
   },
   versions: {
     drafts: {
